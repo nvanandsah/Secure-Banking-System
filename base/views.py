@@ -6,4 +6,4 @@ def home(request):
 	if not (request.user.is_authenticated):
 		return render(request,"base/home.html",{})
 	else:
-		return render(request,"base/loggedin.html",{'content' : request.user})
+		return render(request,"base/loggedin.html",{'name' : request.user.email,'Acc':request.user.acc_no})

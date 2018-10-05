@@ -28,16 +28,20 @@ class UserRegistrationForm(UserCreationForm):
         return user
 
 class UserLoginForm(forms.Form):
-    account_no = forms.IntegerField(label="Account Number")
+    acc_no = forms.IntegerField(label="Account Number")
     password = forms.CharField(widget=forms.PasswordInput)
-    if account_no and password:
-            u_obj = User.objects.filter(account_no=account_no).first()
-            if u_obj:
-                user = authenticate(email=u_obj.email, password=password)
-                if not user:
+
+    def clean(self, *args, **kwargs):
+        acc_no = self.cleaned_data.get("acc_no")
+        password = self.cleaned_data.get("password")
+        if acc_no and password:
+                u_obj = User.objects.filter(acc_no=acc_no).first()
+                if u_obj:
+                    user = authenticate(email=u_obj.email, password=password)
+                    if not user:
+                        raise forms.ValidationError("Account Does Not Exist.")
+                    if not user.check_password(password):
+                        raise forms.ValidationError("Password Does not Match.")
+                else:
                     raise forms.ValidationError("Account Does Not Exist.")
-                if not user.check_password(password):
-                    raise forms.ValidationError("Password Does not Match.")
-            else:
-                raise forms.ValidationError("Account Does Not Exist.")
-            
+        return super(UserLoginForm, self).clean(*args, **kwargs)
