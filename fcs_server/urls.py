@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^signup/',signup,name="signup"),
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name="home"),
+    url(r'^transaction/',transaction,name="transaction")
     
 ]
