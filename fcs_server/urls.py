@@ -19,6 +19,7 @@ from login.views import signup, _login, logout_view
 from base.views import home
 urlpatterns = [
 #	url(r'^login/',include('login.urls'))
+
     url(r'^login/',_login,name="login"),
     url(r'^logout/',logout_view,name="logout"),
     url(r'^signup/',signup,name="signup"),
