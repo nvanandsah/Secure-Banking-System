@@ -1,23 +1,19 @@
 from django import forms
-
-class trnsction(forms.Form):
-    name = forms.CharField(max_length=30)
-    acc_no = forms.EmailField(max_length=254)
-    message = forms.CharField(
-        max_length=2000,
-        widget=forms.Textarea(),
-        help_text='Write here your message!'
-    )
-    amount = forms.
-    source = forms.CharField(       # A hidden input for internal use
-        max_length=50,              # tell from which page the user sent the message
-        widget=forms.HiddenInput()
-    )
-
+from .models import transaction
+class trnsction(forms.ModelForm):
+    class Meta:
+        model = transaction
+        fields = {
+            "full_name",
+            "acc_no",
+            "Amount",
+            "message",
+        }
     def clean(self):
-        cleaned_data = super(ContactForm, self).clean()
-        name = cleaned_data.get('name')
-        email = cleaned_data.get('email')
+        cleaned_data = super(forms.ModelForm, self).clean()
+        Name = cleaned_data.get('Name')
+        Account_No = cleaned_data.get('Account_No')
+        Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
-        if not name and not email and not message:
+        if not Name and not Account_No and not message:
             raise forms.ValidationError('You have to write something!')

@@ -43,7 +43,7 @@ class User(AbstractUser):
     Address = models.CharField(max_length=512)
     city = models.CharField(max_length=256)
     balance = models.DecimalField(
-        default=0,
+        default=100000,
         max_digits=12,
         decimal_places=2
         )
