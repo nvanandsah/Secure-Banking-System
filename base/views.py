@@ -9,7 +9,3 @@ def home(request):
 		return render(request,"base/home.html",{})
 	else:
 		return render(request,"base/loggedin.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance})
-<<<<<<< HEAD
-=======
-
->>>>>>> 37914ad30fa7054897cc414c1ae054ff084b4ce8
