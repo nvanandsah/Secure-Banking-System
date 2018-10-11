@@ -1,5 +1,9 @@
 from django.db import models
-
+from django.core.validators import (
+    RegexValidator,
+    MinValueValidator,
+    MaxValueValidator
+    )
 # Create your models here.
 class transaction():
         full_name = models.CharField(
