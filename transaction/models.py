@@ -4,6 +4,7 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
     )
+REGEX = '^[a-zA-Z ]*$'
 # Create your models here.
 class transaction():
         full_name = models.CharField(
