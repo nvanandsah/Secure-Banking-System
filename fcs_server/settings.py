@@ -51,12 +51,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 AUTH_USER_MODEL = 'login.User'
 
 LOGIN_URL = "/login/"
 
 ROOT_URLCONF = 'fcs_server.urls'
+TIME= 3*60  
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRE_AT_BROWSER_CLOSE= True
+SESSION_COOKIE_AGE = TIME    
+SESSION_IDLE_TIMEOUT = TIME 
 
 TEMPLATES = [
     {
