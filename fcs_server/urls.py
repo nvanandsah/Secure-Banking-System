@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from login.views import signup, _login, logout_view
 from base.views import home
+from transaction.views import transaction
 urlpatterns = [
 #	url(r'^login/',include('login.urls'))
 
