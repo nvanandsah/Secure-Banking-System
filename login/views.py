@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegistrationForm, UserLoginForm
+from transaction.forms import trnsction
 from .models import User
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
@@ -58,6 +59,11 @@ def _login(request):
                    "title": title
                    }
         return render(request, "login/form.html", context)
+
+
+
+
+
 
 
 def logout_view(request):  
