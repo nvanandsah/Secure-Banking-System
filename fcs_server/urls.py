@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^login/',_login,name="login"),
     url(r'^logout/',logout_view,name="logout"),
     url(r'^signup/',signup,name="signup"),
-    url(r'^transaction/',trnsac,name="trnsac"),
+    url(r'^transaction/',include('transaction.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name="home"),
 
