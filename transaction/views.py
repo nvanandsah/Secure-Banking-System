@@ -28,7 +28,15 @@ def trnsac(request):
                 print('transaction possible')
             else:
                 print('insuffiecient balance')
-            return redirect("home")
+
+            #return redirect("home")
+            context = {"message": 'Error : Insufficient Balance',
+                        "name" : request.user.full_name,
+                        "Acc" :  request.user.acc_no,
+                        "bal" :ammount_user
+                   
+                   }
+            return render(request,"transaction/bal_insuff.html", context)
         context = {"form": form,
                    "title": title
                    }
