@@ -10,8 +10,8 @@ __pycache__/
 */*/*/__pycache__/
 */*/__pycache__/
 */__pycache__/
-*/migrations/
-*/*/migrations/
+*/migrations/*.py
+*/*/migrations/*.py
 */*/*/migrations/
 
 
