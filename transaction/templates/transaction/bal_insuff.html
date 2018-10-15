@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>logged in </title>
+	</head>
+	<script>
+		alert('{{ message }}');
+	</script>
+	<body>
+		<h1>Hi , You have insufficient balance to make this transaction {{name}}</h1>
+		<h1>Account No. {{Acc}}</h1>
+		
+		<h2>Your current Balance is  {{bal}}</h2>
+		<p>
+			<a class="btn btn-primary btn-md" href="{% url 'home' %}" role="button">Logout</a>
+            <a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+            <br>
+            <a class="btn btn-primary btn-md" href="#" role="button">ADD Money</a>
+          
+		 </p>
+	</body>
+</html>
