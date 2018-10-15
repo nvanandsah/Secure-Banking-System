@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import trnsction
 # Create your views here.
 def transaction(request):
-
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:

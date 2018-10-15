@@ -1,2 +1,7 @@
 *.pyc
+<<<<<<< HEAD
 __pycache__/
+=======
+__pycache__/*.pyc
+migrations/
+>>>>>>> 384bc7a1b71f7627363610f4d8798d3e95a06f1a
