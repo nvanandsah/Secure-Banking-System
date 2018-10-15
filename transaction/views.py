@@ -28,6 +28,7 @@ def trnsac(request):
                 print('transaction possible')
             else:
                 print('insuffiecient balance')
+              
             return redirect("home")
         context = {"form": form,
                    "title": title
