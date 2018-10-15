@@ -4,6 +4,8 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
     )
+
+REGEX = '^[a-zA-Z ]*$'
 # Create your models here.
 
 REGEX = '^[a-zA-Z ]*$'
