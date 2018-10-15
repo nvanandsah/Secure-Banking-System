@@ -32,10 +32,6 @@ class transaction(models.Model):
                 validators=[
                     MinValueValidator(1000),
                     MaxValueValidator(100000)
-<<<<<<< HEAD
-                   
-=======
->>>>>>> 24a59c7d0ec26e8ba952e1caeb3b6b27a644416f
                 ]
         )
         message = models.CharField(

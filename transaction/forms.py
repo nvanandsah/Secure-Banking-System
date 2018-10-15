@@ -34,10 +34,5 @@ class trnsction(forms.Form):
         name = self.cleaned_data.get('full_name')
         message = self.cleaned_data.get('message')
         acc_no=self.cleaned_data.get("acc_no")
-<<<<<<< HEAD
-        if not name and not message:
-            raise forms.ValidationError('You have to write something!')
-=======
         if not name and not email and not message:
             raise forms.ValidationError('You have to write something!')'''
->>>>>>> 24a59c7d0ec26e8ba952e1caeb3b6b27a644416f
