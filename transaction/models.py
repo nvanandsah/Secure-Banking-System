@@ -10,13 +10,6 @@ REGEX = '^[a-zA-Z ]*$'
 
 REGEX = '^[a-zA-Z ]*$'
 class transaction(models.Model):
-        trnsID = models.PositiveIntegerField(
-                unique=True,
-                validators=[
-                    MinValueValidator(0),
-                    MaxValueValidator(99999999)
-                    ]            
-        )
         full_name = models.CharField(
                 max_length=256,
                 blank=False,
@@ -39,7 +32,10 @@ class transaction(models.Model):
                 validators=[
                     MinValueValidator(1000),
                     MaxValueValidator(100000)
+<<<<<<< HEAD
                    
+=======
+>>>>>>> 24a59c7d0ec26e8ba952e1caeb3b6b27a644416f
                 ]
         )
         message = models.CharField(
@@ -52,3 +48,10 @@ class transaction(models.Model):
                             )
                         ]
         )
+        '''       trnsID = models.PositiveIntegerField(
+                unique=True,
+                validators=[
+                    MinValueValidator(0),
+                    MaxValueValidator(99999999)
+                    ]            
+        )'''
