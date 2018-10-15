@@ -5,7 +5,7 @@ def transaction(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
-        return render(request,"transaction/tr_page.html",{'name' : request.user.full_name,'Acc':request.user.acc_no,'bal':request.user.balance})
+        return redirect("transfer")
 
 def trnsac(request):
     if not request.user.is_authenticated:
@@ -19,7 +19,7 @@ def trnsac(request):
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
-
+            
             if(ammount_user>amount):
                 print('transaction possible')
             else:
@@ -29,4 +29,4 @@ def trnsac(request):
                    "title": title
                    }
         return render(request, "transaction/tr_page.html", context)
-return render(request, "login/form.html", context)
+
