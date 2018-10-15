@@ -17,12 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from login.views import signup, _login, logout_view
-from transaction.views import trnsac
-
 from base.views import home
-from transaction.views import transaction
+
 urlpatterns = [
-	url(r'^transactions/',transact),
     url(r'^login/',_login,name="login"),
     url(r'^logout/',logout_view,name="logout"),
     url(r'^signup/',signup,name="signup"),
