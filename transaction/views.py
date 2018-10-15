@@ -19,6 +19,7 @@ def trnsac(request):
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
+
             if(ammount_user>amount):
                 print('transaction possible')
             else:
@@ -27,10 +28,5 @@ def trnsac(request):
         context = {"form": form,
                    "title": title
                    }
-<<<<<<< HEAD
         return render(request, "transaction/tr_page.html", context)
-=======
-        return render(request, "login/form.html", context)
-    
->>>>>>> d5e71dbe0e56147ec62c81f5fd8d9c32cf37d5c8
-
+return render(request, "login/form.html", context)
