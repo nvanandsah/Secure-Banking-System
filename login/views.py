@@ -61,24 +61,7 @@ def _login(request):
         return render(request, "login/form.html", context)
 
 
-def transact(request):
-    if not request.user.is_authenticated:
-        return redirect("home")
-    else:
-        title="Transaction"
-        form=trnsction(request.POST or None)
-        if form.is_valid():
-            name=form.cleaned_data.get("name")
-            account_no=cleaned_data.get("account_no")
-            message=cleaned_data.get("message")
-            amount=cleaned_data.get("amount")
-            if amount>request.user.balance:
-                print("Insufficient")
-        context = {"form": form,
-                   "title": title
-                   }
-        return render(request,"transaction/tr_page.html",context)
-    
+
 
 
 
