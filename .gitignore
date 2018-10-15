@@ -110,3 +110,4 @@ venv.bak/
 *.pyc
 *.pyc
 *.pyc
+*.sqlite3
