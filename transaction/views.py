@@ -28,8 +28,5 @@ def trnsac(request):
                    "title": title
                    }
         return render(request, "login/form.html", context)
-<<<<<<< HEAD
     
-=======
->>>>>>> 77f667d85c3b3b6c3ab1c871522ff5344751a046
 
