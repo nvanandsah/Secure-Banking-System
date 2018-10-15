@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import trnsction
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+@login_required()
 def transaction(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
         return redirect("transfer")
 
+@login_required()
 def trnsac(request):
     if not request.user.is_authenticated:
         return redirect("home")

@@ -39,6 +39,8 @@ class transaction(models.Model):
                 validators=[
                     MinValueValidator(1000),
                     MaxValueValidator(100000)
+                    message='Amount must be between 1000 & 100000'
+                    code='insufficient_amount'
                 ]
         )
         message = models.CharField(
