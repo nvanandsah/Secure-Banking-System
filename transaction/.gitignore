@@ -1,3 +1,11 @@
 *.pyc
+<<<<<<< HEAD
+<<<<<<< HEAD
+__pycache__/
+=======
+__pycache__/*.pyc
+>>>>>>> 384bc7a1b71f7627363610f4d8798d3e95a06f1a
+=======
 __pycache__/
 *cpython-36.pyc
+>>>>>>> 77f667d85c3b3b6c3ab1c871522ff5344751a046
