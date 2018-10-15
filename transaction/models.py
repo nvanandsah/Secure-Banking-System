@@ -7,6 +7,31 @@ from django.core.validators import (
 
 REGEX = '^[a-zA-Z ]*$'
 # Create your models here.
+class addmoney_own(models.Model):
+    acc_no = models.PositiveIntegerField(
+                unique=True,
+                validators=[
+                    MinValueValidator(10000000),
+                    MaxValueValidator(99999999)
+                    ]
+        )
+    Amount = models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(1000),
+                    MaxValueValidator(100000)
+                ]
+        )
+    message = models.CharField(
+                max_length=256,
+                validators=[
+                        RegexValidator(
+                            regex=REGEX,
+                            message='Messages must be Alphabetic',
+                            code='invalid_message_name'
+                            )
+                        ]
+        )
+
 
 REGEX = '^[a-zA-Z ]*$'
 class transaction(models.Model):
