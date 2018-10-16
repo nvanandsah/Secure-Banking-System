@@ -5,7 +5,7 @@ class trnsction(forms.ModelForm):
     class Meta:
         model = transaction
         fields = {
-            "full_name",
+            "fullname",
             "acc_no",
             "Amount",
             "message",
@@ -17,8 +17,7 @@ class trnsction(forms.ModelForm):
         Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
         if not Name and not Account_No and not message:
-            raise forms.ValidationError('You have to write something!')
-'''              
+
 class trnsction(forms.Form):
     name = forms.CharField(max_length=30)
     acc_no = forms.IntegerField(label="account_no")
@@ -28,9 +27,11 @@ class trnsction(forms.Form):
         help_text='Write here your message!'
     )
     amount = forms.IntegerField(label="amount")
+   
+
     def clean(self):
         name = self.cleaned_data.get('name')
         message = self.cleaned_data.get('message')
         acc_no=self.cleaned_data.get("account_no")
         if not name and not email and not message:
-            raise forms.ValidationError('You have to write something!')'''
+            raise forms.ValidationError('You have to write something!')
