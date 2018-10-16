@@ -1,9 +1,13 @@
 from django import forms
+from transaction.models import TX_in
 
+<<<<<<< HEAD
+=======
 from .models import transaction,addmoney_own
+>>>>>>> bfd77fddc18611b15635529cd3d75caff0c1fde3
 class trnsction(forms.ModelForm):
     class Meta:
-        model = transaction
+        model = TX_in
         fields = {
             "full_name",
             "acc_no",
@@ -12,8 +16,8 @@ class trnsction(forms.ModelForm):
         }
     def clean(self):
         cleaned_data = super(forms.ModelForm, self).clean()
-        Name = cleaned_data.get('full_ame')
-        Account_No = cleaned_data.get('acc_No')
+        Name = cleaned_data.get('full_name')
+        Account_No = cleaned_data.get('acc_no')
         Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
         
