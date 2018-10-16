@@ -10,6 +10,11 @@ __pycache__/
 */*/*/__pycache__/
 */*/__pycache__/
 */__pycache__/
+*/migrations/*.py
+*/*/migrations/*.py
+*/*/*/migrations/
+
+
 # Distribution / packaging
 .Python
 build/
@@ -110,3 +115,13 @@ venv.bak/
 *.pyc
 *.pyc
 *.pyc
+<<<<<<< HEAD
+login/migrations/0001_initial.py
+login/migrations/0001_initial.py
+login/migrations/0001_initial.py
+db.sqlite3
+login/migrations/__pycache__/0001_initial.cpython-36.pyc
+=======
+*.sqlite3
+db.sqlite3
+>>>>>>> bfd77fddc18611b15635529cd3d75caff0c1fde3

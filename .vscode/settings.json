@@ -1,4 +1,8 @@
 {
     "python.linting.pylintEnabled": false,
-    "python.pythonPath": "C:\\Users\\LK\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+<<<<<<< HEAD
+    "python.pythonPath": "C:\\Users\\Avneet\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+=======
+    "python.pythonPath": "C:\\Users\\Acer\\Anaconda3\\envs\\django_env\\python.exe"
+>>>>>>> 711f300ff9f26def25333086a4c6b07e40207453
 }
