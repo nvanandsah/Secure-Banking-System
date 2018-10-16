@@ -6,7 +6,6 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
     )
-from transaction.models import transaction
 # Create your models here.
 from .managers import UserManager
 REGEX = '^[a-zA-Z ]*$'
@@ -16,9 +15,7 @@ G_CHOICE = (
     ("Female", "Female"),
     )
 
-
 class User(AbstractUser):
-#class User():
     username = None
     full_name = models.CharField(
         max_length=256,
@@ -55,7 +52,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.acc_no)
-        def do_transaction(self, transaction_type, amount, transaction, commit=True):
+        
+    def do_transaction(self, transaction_type, amount, transaction, commit=True):
             if amount <= 0:
                 raise BankingException('Invalid Amount')
             if transaction is None or transaction.amount != amount and transaction.status != 'A':

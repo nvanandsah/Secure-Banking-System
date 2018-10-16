@@ -1,9 +1,9 @@
 from django import forms
+from transaction.models import TX_in
 
-from .models import transaction
 class trnsction(forms.ModelForm):
     class Meta:
-        model = transaction
+        model = TX_in
         fields = {
             "full_name",
             "acc_no",
