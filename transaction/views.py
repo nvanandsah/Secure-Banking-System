@@ -66,11 +66,14 @@ def add_money(request):
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
-            makepay=request.user.do_transaction(0,amount)
+            #makepay=request.user.do_transaction(0,amount)
+            TX_in.start_transact(request.user,request.user.full_name,"2",account_no,amount,message)
             context = {"message": 'Pls wait 24hrs to complete transaction',
                         "Acc" : request.user.acc_no,
                         "bal" :ammount_user
+
                     }
+
             return render(request, "transaction/addedmoney.html", context)
         context = {"form": form,
                    "title": title
