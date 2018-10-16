@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import trnsction
+from .forms import trnsction,addMoney
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import TX_in
@@ -52,4 +52,29 @@ def trnsac(request):
                    "title": title
                    }
         return render(request, "transaction/tr_page.html", context)
+    
+
+@login_required()
+def add_money(request):
+    if not request.user.is_authenticated:
+        return redirect("home")
+    else:
+        title = "Add Money "
+        form = addMoney(request.POST or None)
+        if form.is_valid():
+            account_no = form.cleaned_data.get("Account_No")
+            amount=form.cleaned_data.get("Amount")
+            message = form.cleaned_data.get('message')
+            ammount_user=request.user.balance
+            makepay=request.user.do_transaction(0,amount)
+            context = {"message": 'Pls wait 24hrs to complete transaction',
+                        "Acc" : request.user.acc_no,
+                        "bal" :ammount_user
+                    }
+            return render(request, "transaction/addedmoney.html", context)
+        context = {"form": form,
+                   "title": title
+                   }
+        return render(request, "transaction/addmoney_own.html", context)
+
 

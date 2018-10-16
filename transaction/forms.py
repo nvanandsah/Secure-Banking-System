@@ -1,6 +1,10 @@
 from django import forms
 from transaction.models import TX_in
 
+<<<<<<< HEAD
+=======
+from .models import transaction,addmoney_own
+>>>>>>> bfd77fddc18611b15635529cd3d75caff0c1fde3
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
@@ -18,6 +22,25 @@ class trnsction(forms.ModelForm):
         message = cleaned_data.get('message')
         
         if not Name and not Account_No and not message:
+            raise forms.ValidationError('You have to write something!')
+
+
+class addMoney(forms.ModelForm):
+    class Meta:
+        model = addmoney_own
+        fields = {
+            "acc_no",
+            "Amount",
+            "message",
+        }
+    def clean(self):
+        cleaned_data = super(forms.ModelForm, self).clean()
+        
+        Account_No = cleaned_data.get('acc_No')
+        Amount = cleaned_data.get('Amount')
+        message = cleaned_data.get('message')
+        
+        if  not Account_No and not message and not Amount:
             raise forms.ValidationError('You have to write something!')
 '''             
 class trnsction(forms.Form):

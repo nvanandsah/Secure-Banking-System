@@ -58,7 +58,7 @@ AUTH_USER_MODEL = 'login.User'
 LOGIN_URL = "/login/"
 
 ROOT_URLCONF = 'fcs_server.urls'
-TIME= 3*60  
+TIME= 10*60  
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SESSION_EXPIRE_AT_BROWSER_CLOSE= True
 SESSION_COOKIE_AGE = TIME    
