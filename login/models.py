@@ -41,7 +41,7 @@ class User(AbstractUser):
     Address = models.CharField(max_length=512)
     city = models.CharField(max_length=256)
     balance = models.DecimalField(
-        default=100000,
+        default=1001,
         max_digits=12,
         decimal_places=2
         )
@@ -52,7 +52,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return str(self.acc_no)
-        
+
     def do_transaction(self, transaction_type, amount, transaction, commit=True):
             if amount <= 0:
                 raise BankingException('Invalid Amount')

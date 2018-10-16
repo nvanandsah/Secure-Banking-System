@@ -12,8 +12,8 @@ class trnsction(forms.ModelForm):
         }
     def clean(self):
         cleaned_data = super(forms.ModelForm, self).clean()
-        Name = cleaned_data.get('full_ame')
-        Account_No = cleaned_data.get('acc_No')
+        Name = cleaned_data.get('full_name')
+        Account_No = cleaned_data.get('acc_no')
         Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
         

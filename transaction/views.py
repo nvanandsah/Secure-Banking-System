@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import trnsction
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from .models import TX_in
 
 @login_required()
 def transaction(request):
@@ -18,25 +19,35 @@ def trnsac(request):
         title = "Transaction "
         form = trnsction(request.POST or None)
         if form.is_valid():
-            account_no = form.cleaned_data.get("Account_No")
-            r_name=form.cleaned_data.get("Name")
+            account_no = form.cleaned_data.get("acc_no")
+            r_name=form.cleaned_data.get("full_name")
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
+           # print("ACC_NO"+int(account_no))
             
             if(ammount_user>amount):
                 print('transaction possible')
+                #request.user.balance = request.user.balance - ammount
+                context = {"message": ' Khush hoja',
+                        "name" : request.user.full_name,
+                        "Acc" :  request.user.acc_no,
+                        "bal" :request.user.balance
+                   }
+                TX_in.start_transact(request.user,r_name,"3",account_no,amount,message)
+
+                
             else:
                 print('insuffiecient balance')
-
-            #return redirect("home")
-            context = {"message": 'Error : Insufficient Balance',
+                context = {"message": 'Error : Insufficient Balance',
                         "name" : request.user.full_name,
                         "Acc" :  request.user.acc_no,
                         "bal" :ammount_user
                    
                    }
-            return render(request,"transaction/bal_insuff.html", context)
+
+            #return redirect("home")
+                return render(request,"transaction/bal_insuff.html", context)
         context = {"form": form,
                    "title": title
                    }
