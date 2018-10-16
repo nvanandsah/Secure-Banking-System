@@ -10,7 +10,7 @@ from django.db.models import SET_NULL, CASCADE
 REGEX = '^[a-zA-Z ]*$'
 # Create your models here.
 
-class addmoney_own(models.Model):
+class addmoneyown(models.Model):
     acc_no = models.PositiveIntegerField(
                 unique=True,
                 validators=[

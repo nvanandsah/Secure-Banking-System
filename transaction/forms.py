@@ -1,7 +1,7 @@
 from django import forms
 from transaction.models import TX_in
 
-from .models import TX_in,addmoney_own
+from .models import TX_in,addmoneyown
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
@@ -24,7 +24,7 @@ class trnsction(forms.ModelForm):
 
 class addMoney(forms.ModelForm):
     class Meta:
-        model = addmoney_own
+        model = addmoneyown
         fields = {
             "acc_no",
             "Amount",
