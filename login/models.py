@@ -66,3 +66,6 @@ class User(AbstractUser):
                 raise BankingException('Security Error')
             if commit:
                 self.save()
+
+#class InternalUser(AbstractUser):
+
