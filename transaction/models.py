@@ -4,13 +4,14 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
     )
+from django.db.models import Max
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
 REGEX = '^[a-zA-Z ]*$'
 # Create your models here.
 
-class addmoneyown(models.Model):
+class addmoney_own(models.Model):
     acc_no = models.PositiveIntegerField(
                 unique=True,
                 validators=[
@@ -49,7 +50,6 @@ class TX_in(models.Model):
                         ]
         )
         acc_no = models.PositiveIntegerField(
-                unique=True,
                 validators=[
                     MinValueValidator(10000000),
                     MaxValueValidator(99999999)
@@ -91,8 +91,8 @@ class TX_in(models.Model):
                     MinValueValidator(0),
                     MaxValueValidator(99999999)
                     ]            
-        )'''
-        '''def start_transaction(self, user, to_name , Tr_type, from_acc_no, to_acc_no, ammount):
+        )
+        def start_transaction(self, user, to_name , Tr_type, from_acc_no, to_acc_no, ammount):
             from_acc = User.objects.filter(acc_no = int(from_acc_no.strip()))
             if(from_acc.len !=0 ):
                 from_acc = from_acc[0]
@@ -115,6 +115,7 @@ class TX_in(models.Model):
             if(Tr_type=='1'):
                 from_acc = user
                 if(from_acc!=None ):
+
                     currentDT = datetime.datetime.now()
                     transactions = TX_in(fromUser = from_acc, toUser = None, status='3',
                                                 full_name= user.full_name, acc_no= from_acc.acc_no,
@@ -122,7 +123,8 @@ class TX_in(models.Model):
                                                 Amount=ammount,
                                                 creation_time=currentDT,
                                                 message=message,
-                                                Tr_type="1" )
+                                                Tr_type="1",
+                                                )
                     transactions.save()
             if(Tr_type=='2'):
                 from_acc = user
@@ -134,7 +136,8 @@ class TX_in(models.Model):
                                                 Amount=ammount,
                                                 creation_time=currentDT,
                                                 message=message,
-                                                Tr_type="2" )
+                                                Tr_type="2",
+                                                )
                     transactions.save()
             
             if(Tr_type=='3'):
@@ -155,7 +158,8 @@ class TX_in(models.Model):
                                                 Amount=ammount,
                                                 creation_time=currentDT,
                                                 message=message,
-                                                Tr_type="3" )
+                                                Tr_type="3",
+                                                 )
                                 transactions.save()
                         else:
                             print("Name conflict ")
