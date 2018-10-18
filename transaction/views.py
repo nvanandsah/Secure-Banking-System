@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import trnsction,addMoney
+from .forms import trnsction,addMoney,debitMoney
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import TX_in
@@ -79,5 +79,45 @@ def add_money(request):
                    "title": title
                    }
         return render(request, "transaction/addmoney_own.html", context)
+
+
+@login_required()
+def debit_money(request):
+    if not request.user.is_authenticated:
+        return redirect("home")
+    else:
+        title = "Debit Money "
+        form = addMoney(request.POST or None)
+        if form.is_valid():
+            account_no = form.cleaned_data.get("Account_No")
+            amount=form.cleaned_data.get("Amount")
+            message = form.cleaned_data.get('message')
+            ammount_user=request.user.balance
+            #makepay=request.user.do_transaction(0,amount)
+            if(ammount_user > ammount):
+                TX_in.start_transact(request.user,request.user.full_name,"1",account_no,amount,message)
+                context = {"message": 'Pls wait 24hrs to complete transaction',
+                            "Acc" : request.user.acc_no,
+                            "bal" :ammount_user
+
+                        }
+
+                return render(request, "transaction/addedmoney.html", context)
+            else:
+                print('insuffiecient balance')
+                context = {"message": 'Error : Insufficient Balance',
+                        "name" : request.user.full_name,
+                        "Acc" :  request.user.acc_no,
+                        "bal" :ammount_user
+                   
+                   }
+
+            #return redirect("home")
+                return render(request,"transaction/bal_insuff.html", context)
+                
+        context = {"form": form,
+                   "title": title
+                   }
+        return render(request, "transaction/debitmoney.html", context)
 
 
