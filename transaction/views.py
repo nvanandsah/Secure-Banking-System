@@ -62,7 +62,7 @@ def add_money(request):
         title = "Add Money "
         form = addMoney(request.POST or None)
         if form.is_valid():
-            account_no = form.cleaned_data.get("Account_No")
+            account_no = form.cleaned_data.get("acc_No")
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
