@@ -1,10 +1,7 @@
 from django import forms
 from transaction.models import TX_in
 
-<<<<<<< HEAD
-=======
-from .models import transaction,addmoney_own
->>>>>>> bfd77fddc18611b15635529cd3d75caff0c1fde3
+from .models import addmoney_own
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
