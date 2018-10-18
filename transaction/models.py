@@ -8,7 +8,7 @@ from django.db.models import Max
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
-REGEX = '^[a-zA-Z ]*$'
+'''REGEX = '^[a-zA-Z ]*$'
 class debitmoney(models.Model):
     acc_no = models.PositiveIntegerField(
                 unique=True,
@@ -36,7 +36,7 @@ class debitmoney(models.Model):
 
 
 
-
+'''
 REGEX = '^[a-zA-Z ]*$'
 class TX_in(models.Model):
         full_name = models.CharField(

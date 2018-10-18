@@ -1,7 +1,6 @@
 from django import forms
 from transaction.models import TX_in
 
-from .models import debitmoney
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
@@ -52,12 +51,12 @@ class addMoney(forms.Form):
         amount = self.cleaned_data.get('Amount')
         message = self.cleaned_data.get('message')
         acc_no=self.cleaned_data.get("acc_no")
-        if not name and not email and not message:
+        if amount and not message:
             raise forms.ValidationError('You have to write something!')
 
-class debitMoney(forms.ModelForm):
+'''class debitMoney(forms.ModelForm):
     class Meta:
-        model = addmoney_own
+        model = debitmoney
         fields = {
             "acc_no",
             "Amount",
@@ -70,6 +69,22 @@ class debitMoney(forms.ModelForm):
         Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
         
-        if  not Account_No and not message and not Amount:
+        
         if not amount and not acc_no:
+            raise forms.ValidationError('You have to write something!')
+'''
+
+class debitMoney(forms.Form):
+    Amount = forms.IntegerField(label="Amount")
+    acc_no = forms.IntegerField(label="acc_no")
+    message = forms.CharField(
+        max_length=2000,
+        widget=forms.Textarea(),
+        help_text='Write here your message!'
+    )
+    def clean(self):
+        amount = self.cleaned_data.get('Amount')
+        message = self.cleaned_data.get('message')
+        acc_no=self.cleaned_data.get("acc_no")
+        if amount and not message:
             raise forms.ValidationError('You have to write something!')

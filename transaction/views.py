@@ -9,7 +9,14 @@ def transaction(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
-        return redirect("transfer")
+        context = {
+                        "name" : request.user.full_name,
+                        "Acc" :  request.user.acc_no,
+                        "bal" :request.user.balance,
+                   
+                   }
+        return render(request, "transaction/transaction.html", context)
+        
 
 @login_required()
 def trnsac(request):
@@ -89,12 +96,12 @@ def debit_money(request):
         title = "Debit Money "
         form = addMoney(request.POST or None)
         if form.is_valid():
-            account_no = form.cleaned_data.get("Account_No")
+            account_no = form.cleaned_data.get("acc_No")
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
             #makepay=request.user.do_transaction(0,amount)
-            if(ammount_user > ammount):
+            if(ammount_user > amount):
                 TX_in.start_transact(request.user,request.user.full_name,"1",account_no,amount,message)
                 context = {"message": 'Pls wait 24hrs to complete transaction',
                             "Acc" : request.user.acc_no,
