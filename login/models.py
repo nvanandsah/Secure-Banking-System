@@ -16,6 +16,7 @@ G_CHOICE = (
     )
 
 D_CHOICE = (
+    ("","")
     ("Employee", "Employee"),
     ("Sys. Admin", "Sys. Admin"),
     ("Sys. Manager", "Sys. Manager"),
@@ -72,8 +73,5 @@ class User(AbstractUser):
             if commit:
                 self.save()
 
-
-    def __str__(self):
-        return str(self.full_name)
 
 
