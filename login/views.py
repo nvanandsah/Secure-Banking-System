@@ -61,10 +61,10 @@ def _login(request):
         return render(request, "login/form.html", context)
 
 
-def Int_Login(request):
+'''def Int_Login(request):
     if request.user.is_authenticated:
         return redirect("home")
-    else:    
+    else:   ''' 
 
 
 

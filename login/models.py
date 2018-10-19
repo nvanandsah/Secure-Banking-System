@@ -15,6 +15,11 @@ G_CHOICE = (
     ("Female", "Female"),
     )
 
+D_CHOICE = (
+    ("Employee", "Employee"),
+    ("Sys. Admin", "Sys. Admin"),
+    ("Sys. Manager", "Sys. Manager"),
+    )
 class User(AbstractUser):
     username = None
     full_name = models.CharField(
@@ -46,7 +51,7 @@ class User(AbstractUser):
         decimal_places=2
         )
     objects = UserManager()
-
+    designation = models.CharField(max_length=25, choices=D_CHOICE)
     USERNAME_FIELD = 'email'  # use email to log in
     REQUIRED_FIELDS = []  # required when user is created
 
@@ -67,5 +72,8 @@ class User(AbstractUser):
             if commit:
                 self.save()
 
-#class InternalUser(AbstractUser):
+
+    def __str__(self):
+        return str(self.full_name)
+
 

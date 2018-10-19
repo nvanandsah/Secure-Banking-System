@@ -8,35 +8,7 @@ from django.db.models import Max
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
-'''REGEX = '^[a-zA-Z ]*$'
-class debitmoney(models.Model):
-    acc_no = models.PositiveIntegerField(
-                unique=True,
-                validators=[
-                    MinValueValidator(10000000),
-                    MaxValueValidator(99999999)
-                    ]
-        )
-    Amount = models.PositiveIntegerField(
-                validators=[
-                    MinValueValidator(1000),
-                    MaxValueValidator(100000)
-                ]
-        )
-    message = models.CharField(
-                max_length=256,
-                validators=[
-                        RegexValidator(
-                            regex=REGEX,
-                            message='Messages must be Alphabetic',
-                            code='invalid_message_name'
-                            )
-                        ]
-        )
 
-
-
-'''
 REGEX = '^[a-zA-Z ]*$'
 class TX_in(models.Model):
         full_name = models.CharField(
@@ -86,31 +58,7 @@ class TX_in(models.Model):
         is_cash = models.BooleanField(editable=False)
         creation_time = models.DateTimeField(auto_now_add=True)
        # last_changed_time = models.DateTimeField(auto_now=True)
-        '''trnsID = models.PositiveIntegerField(
-                unique=True,
-                validators=[
-                    MinValueValidator(0),
-                    MaxValueValidator(99999999)
-                    ]            
-        )
-        def start_transaction(self, user, to_name , Tr_type, from_acc_no, to_acc_no, ammount):
-            from_acc = User.objects.filter(acc_no = int(from_acc_no.strip()))
-            if(from_acc.len !=0 ):
-                from_acc = from_acc[0]
-                if(from_acc.acc_no != user.acc_no):
-                    print("Doesn't belong to you")
-                else:
-                    to_acc = User.objects.filter(acc_no = int(to_acc_no.strip()))
-                    if(to_acc != None):
-                        if(to_acc.full_name == to_name):
-                            if(to_acc.acc_no == user.acc_no and Tr_type==3):
-                                print("Can't transfer to same account")
-                            elif(to_acc.acc_no==user.acc_no):
-                                user.do_transaction(Tr_type,ammount,self,False)
-                            else:
-                                kwarg = []
-                                transactions = transaction(fromUser = from_acc, toUser = to_acc, status='3',
-                                                full_name= to_acc.full_name, acc_no= to_acc.acc_no )'''
+
         @staticmethod
         def start_transact(user, to_name , Tr_type, to_acc_no, ammount,message):
             if(Tr_type=='1'):
