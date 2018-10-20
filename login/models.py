@@ -15,12 +15,6 @@ G_CHOICE = (
     ("Female", "Female"),
     )
 
-D_CHOICE = (
-    ("","")
-    ("Employee", "Employee"),
-    ("Sys. Admin", "Sys. Admin"),
-    ("Sys. Manager", "Sys. Manager"),
-    )
 class User(AbstractUser):
     username = None
     full_name = models.CharField(
