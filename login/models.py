@@ -14,7 +14,13 @@ G_CHOICE = (
     ("Male", "Male"),
     ("Female", "Female"),
     )
-
+D_CHOICE = (
+			("user", "permission to do account operations"),
+			("merchant", "create payments for their users"),
+			("employee", "check the employee dashboard"),
+			("manager", "Manager/Staff, critical transactions"),
+			("admin", "admin"),
+		)
 class User(AbstractUser):
     username = None
     full_name = models.CharField(

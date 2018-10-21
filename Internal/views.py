@@ -1,12 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm, UserLoginForm
-from .models import IntUser
+from login.forms import UserRegistrationForm, UserLoginForm
+from login.models import User
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
+from django.shortcuts import render
+from transaction.models import TX_in
+
+
+# Create your views here.
+def home(request):
+	print(request.user.is_authenticated)
+	#print(request.user.email)
+	#print(request.user.acc_no)
+	if not (request.user.is_authenticated):
+		return render(request,"base/home.html",{})
+	else:
+		#arr = TX_in.objects.filter(acc_no=request.user.acc_no)
+		arr = TX_in.objects.all()
+		print(arr)
+		return render(request,"base/loggedinEmployee.html",{'name' : request.user.email,'trns':arr})
+
 
 def signup(request):
     if request.user.is_authenticated:

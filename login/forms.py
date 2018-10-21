@@ -14,6 +14,7 @@ class UserRegistrationForm(UserCreationForm):
                   "contact_no",
                   "Address",
                   "city",
+                  "designation",
                   "password1",
                   "password2"
                   ]

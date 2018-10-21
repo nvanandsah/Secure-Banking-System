@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^logout/',logout_view,name="logout"),
     url(r'^signup/',signup,name="signup"),
     url(r'^transaction/',include('transaction.urls')),
-    url(r'^internal/',include('internal.urls'))
+    url(r'^internal/',include('Internal.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name="home"),
 

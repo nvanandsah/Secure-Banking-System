@@ -33,7 +33,10 @@ def signup(request):
             user = authenticate(username=email, password=password)
             print(user)
             #return render(request,"base/loggedin.html",{'name':email, 'Acc':user.acc_no,'Pass':password})
-            return redirect("home")
+            if(user.designation == "user"):
+                return redirect("home")
+            else:
+                pass
         else:
             print(form.is_valid())
         context = {"title": title, "form": form}
