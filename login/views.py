@@ -45,6 +45,10 @@ def signup(request):
 
 def _login(request):
     if request.user.is_authenticated:
+        print(request.user.designation)
+        if request.user.designation=="employee":
+            print("Emplyee")
+            return redirect("ihome")
         return redirect("home")
     else:
         title = "Login "

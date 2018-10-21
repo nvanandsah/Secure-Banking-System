@@ -47,8 +47,8 @@ class TX_in(models.Model):
         fromUser = models.ForeignKey(User,related_name="from_account", null=True, on_delete=SET_NULL, blank=True)
         toUser = models.ForeignKey(User, related_name="to_account", null=True, on_delete=SET_NULL, blank=True)
         STATUS = (
-            ('1', "Payment/Cash"),
-            ('2', "Approved"),
+            ('1', "Approved"),
+            ('2', "Payment/Cash"),
             ('3', "Processing"),
             ('4', "Rejection"),
             ('5', "Error_Occured"),

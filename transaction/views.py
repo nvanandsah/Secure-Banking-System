@@ -81,7 +81,7 @@ def add_money(request):
 
                     }
 
-            return render(request, "transaction/addedmoney.html", context)
+            return redirect("home")
         context = {"form": form,
                    "title": title
                    }
@@ -109,7 +109,7 @@ def debit_money(request):
 
                         }
 
-                return render(request, "transaction/addedmoney.html", context)
+                return redirect("home")
             else:
                 print('insuffiecient balance')
                 context = {"message": 'Error : Insufficient Balance',
