@@ -8,6 +8,7 @@ from django.db.models import Max
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
+from django.contrib import messages
 
 REGEX = '^[a-zA-Z ]*$'
 class TX_in(models.Model):
@@ -59,59 +60,8 @@ class TX_in(models.Model):
         creation_time = models.DateTimeField(auto_now_add=True)
        # last_changed_time = models.DateTimeField(auto_now=True)
 
-        @staticmethod
-        def start_transact(user, to_name , Tr_type, to_acc_no, ammount,message):
-            if(Tr_type=='1'):
-                from_acc = user
-                if(from_acc!=None ):
-
-                    currentDT = datetime.datetime.now()
-                    transactions = TX_in(fromUser = from_acc, toUser = None, status='3',
-                                                full_name= user.full_name, acc_no= from_acc.acc_no,
-                                                is_cash=True,
-                                                Amount=ammount,
-                                                creation_time=currentDT,
-                                                message=message,
-                                                Tr_type="1",
-                                                )
-                    transactions.save()
-            if(Tr_type=='2'):
-                from_acc = user
-                if(from_acc!=None ):
-                    currentDT = datetime.datetime.now()
-                    transactions = TX_in(fromUser = from_acc, toUser = None, status='3',
-                                                full_name= user.full_name, acc_no= from_acc.acc_no,
-                                                is_cash=True,
-                                                Amount=ammount,
-                                                creation_time=currentDT,
-                                                message=message,
-                                                Tr_type="2",
-                                                )
-                    transactions.save()
-            
-            if(Tr_type=='3'):
-                from_acc = user
-                if(from_acc!=None ):
-                    currentDT = datetime.datetime.now()
-                    to_acc = User.objects.filter(acc_no = to_acc_no)
-              #      print("AccountNO"+to_acc_no)
-                    to_acc=to_acc[0]
-                    if(to_acc != None):
-                        if(to_acc.full_name == to_name):
-                            if(to_acc.acc_no == user.acc_no):
-                                print("Can't transfer to same account")
-                            else:
-                                transactions = TX_in(fromUser = from_acc, toUser = to_acc, status='3',
-                                                full_name= to_acc.full_name, acc_no= to_acc.acc_no,
-                                                is_cash=False,
-                                                Amount=ammount,
-                                                creation_time=currentDT,
-                                                message=message,
-                                                Tr_type="3",
-                                                 )
-                                transactions.save()
-                        else:
-                            print("Name conflict ")
+        #@staticmethod
+        
 
                     
 

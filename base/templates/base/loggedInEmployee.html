@@ -5,7 +5,15 @@
 		<meta charset="utf-8">
 		<title>logged in </title>
 	</head>
+	
 	<body>
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
         <h1>Successfully logged in {{name}}</h1>
         <h2>Logged in as an Employee</h2>
 		<p>
@@ -37,9 +45,18 @@
 					<td>{{i.Amount}}</td>
 					{% if i.status != "Approved" %}
 					{% if i.status != "Rejection" %}
+					{% if i.status == "Error_Occured"%}
+					<td>
+							<a href="{% url 'approve_tx_id' i.id %}">Retry</a>
+					</td>
+					{% endif %}
+
+					{% if i.status != "Error_Occured"%}
 					<td>
 							<a href="{% url 'approve_tx_id' i.id %}">Approve</a>
 					</td>
+					{% endif %}
+
 					<td>
 						<a href="{% url 'decline_tx_id' i.id %}">Decline</a>
 					</td>

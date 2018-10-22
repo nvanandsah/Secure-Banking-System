@@ -60,7 +60,7 @@ def _login(request):
             password = form.cleaned_data.get("password")
             user = authenticate(email=user_obj.email, password=password)
             login(request, user)
-            messages.success(request, 'Welcome, {}!' .format(user.full_name))
+            #messages.success(request, 'Welcome, {}!' .format(user.full_name))
             return redirect("home")
         context = {"form": form,
                    "title": title
