@@ -29,7 +29,7 @@ def home(request):
         #print(arr)
         for i in arr:
             i.status=get_from_tuple(TX_in.STATUS, i.status)
-        return render(request,"base/loggedinEmployee.html",{'name' : request.user.email,'trns':arr})
+        return render(request,"base/loggedInEmployee.html",{'name' : request.user.email,'trns':arr})
 
 def approve_transaction(request,txID):
     print(txID)
