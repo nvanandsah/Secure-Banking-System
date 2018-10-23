@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from login.forms import UserRegistrationForm, UserLoginForm
+from .forms import modifyacc
 from login.models import User
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
@@ -9,7 +10,7 @@ from django.contrib.auth import (authenticate,
                                  )
 from django.shortcuts import render
 from transaction.models import TX_in
-from login.models import User
+
 
 
 def get_from_tuple(my_tuple, key):
@@ -34,9 +35,6 @@ def home(request):
 
 # Create your views here.
 def account_handling(request):
-	#print("Here in Employee"+request.user.is_authenticated)
-	#print(request.user.email)
-	#print(request.user.acc_no)
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
@@ -49,7 +47,18 @@ def delete_acc(request,UserID):
     return redirect("iaccount_handling")
 
 
-
+def modify_acc(request,UserID):
+    title = "Modify Account "
+    form = modifyacc(request.POST or None)
+    if form.is_valid():
+        full_name = form.cleaned_data.get('full_name')
+        email = form.cleaned_data.get('email')
+        contact_no=form.cleaned_data.get("contact_no")
+        Address=form.cleaned_data.get("Address")
+        city=form.cleaned_data.get("city")
+        User.objects.filter(id=UserID).update(full_name=full_name,email=email,contact_no=contact_no,Address=Address,city=city)
+    return render(request,"base/modify_acc.html")
+    #return redirect("iaccount_handling")
 
 def approve_transaction(request,txID):
     print(txID)

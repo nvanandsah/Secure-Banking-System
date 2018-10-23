@@ -18,8 +18,10 @@
         <h2>Logged in as an Employee</h2>
 		<p>
 			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
-			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
-		 </p>
+			<a class="btn btn-primary btn-md" href="{% url 'home' %}" role="button">Home</a>
+         </p>
+         <a class="btn btn-primary btn-md" href="{% url 'signup' %}" role="button">Add account</a>
+         <h2>All the present Accounts</h2>
 		 <table class="alt">
 			<thead>
 			<tr>
@@ -37,31 +39,26 @@
 			<tbody>
 			{% for i in arr %}
 				<tr>
+                        {% if i.acc_no != name.acc_no%}
                     <td>{{i.full_name}}</td>
                     <td>{{i.acc_no}}</td>
                     <td>{{i.email}}</td>
                     <td>{{i.contact_no}}</td>
 					<td>{{i.balance}}</td>
 					
-					{% if i.status != "Approved" %}
-					{% if i.status != "Rejection" %}
-					{% if i.status == "Error_Occured"%}
 					<td>
-							<a href="{% url 'approve_tx_id' i.id %}">Retry</a>
+							<a href="{% url 'modify_acc' i.id %}">Modify</a>
 					</td>
-					{% endif %}
-
-					{% if i.status != "Error_Occured"%}
-					<td>
-							<a href="{% url 'approve_tx_id' i.id %}">Approve</a>
-					</td>
-					{% endif %}
+					
 
 					<td>
 						<a href="{% url 'delete_acc' i.id %}">Decline</a>
 					</td>
+			
 					{% endif %}
-					{% endif %}
+
+					
+				
 				</tr>
 			{% endfor %}
 			</tbody>
