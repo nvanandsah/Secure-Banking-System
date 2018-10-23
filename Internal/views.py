@@ -9,6 +9,7 @@ from django.contrib.auth import (authenticate,
                                  )
 from django.shortcuts import render
 from transaction.models import TX_in
+from login.models import User
 
 
 def get_from_tuple(my_tuple, key):
@@ -30,6 +31,25 @@ def home(request):
         for i in arr:
             i.status=get_from_tuple(TX_in.STATUS, i.status)
         return render(request,"base/loggedInEmployee.html",{'name' : request.user.email,'trns':arr})
+
+# Create your views here.
+def account_handling(request):
+	#print("Here in Employee"+request.user.is_authenticated)
+	#print(request.user.email)
+	#print(request.user.acc_no)
+    if not (request.user.is_authenticated):
+        return render(request,"base/home.html",{})
+    else:
+        arr = User.objects.all()
+        return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
+
+def delete_acc(request,UserID):
+    User.objects.filter(id=UserID).delete()
+    print(UserID)
+    return redirect("iaccount_handling")
+
+
+
 
 def approve_transaction(request,txID):
     print(txID)
@@ -81,7 +101,7 @@ def decline_transaction(request,txID):
 
 
 
-    return redirect("ihome")
+    
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")

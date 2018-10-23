@@ -88,3 +88,4 @@ class debitMoney(forms.Form):
         acc_no=self.cleaned_data.get("acc_no")
         if amount and not message:
             raise forms.ValidationError('You have to write something!')
+            

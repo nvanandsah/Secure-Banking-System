@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>logged in </title>
+	</head>
+	
+	<body>
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+        <h1>Successfully logged in {{name}}</h1>
+        <h2>Logged in as an Employee</h2>
+		<p>
+			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+		 </p>
+		 <table class="alt">
+			<thead>
+			<tr>
+                <th>full_name</th>
+                <th>acc_no</th>
+                <th>email</th>
+				<th>contact_no</th>
+                <th>balance</th>
+			
+				<th>Accept</th>
+				<th>Decline</th>
+				
+			</tr>
+			</thead>
+			<tbody>
+			{% for i in arr %}
+				<tr>
+                    <td>{{i.full_name}}</td>
+                    <td>{{i.acc_no}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.contact_no}}</td>
+					<td>{{i.balance}}</td>
+					
+					{% if i.status != "Approved" %}
+					{% if i.status != "Rejection" %}
+					{% if i.status == "Error_Occured"%}
+					<td>
+							<a href="{% url 'approve_tx_id' i.id %}">Retry</a>
+					</td>
+					{% endif %}
+
+					{% if i.status != "Error_Occured"%}
+					<td>
+							<a href="{% url 'approve_tx_id' i.id %}">Approve</a>
+					</td>
+					{% endif %}
+
+					<td>
+						<a href="{% url 'delete_acc' i.id %}">Decline</a>
+					</td>
+					{% endif %}
+					{% endif %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
