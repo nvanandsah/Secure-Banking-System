@@ -4,12 +4,12 @@ from transaction.models import TX_in
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
-        fields = {s
+        fields = {
             "full_name",
             "acc_no",
             "Amount",
             "message",
-            "OTP"
+            "OTP",
         }
     def clean(self):
         cleaned_data = super(forms.ModelForm, self).clean()
@@ -89,3 +89,4 @@ class debitMoney(forms.Form):
         acc_no=self.cleaned_data.get("acc_no")
         if amount and not message:
             raise forms.ValidationError('You have to write something!')
+            

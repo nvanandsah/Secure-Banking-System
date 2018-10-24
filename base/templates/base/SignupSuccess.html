@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>logged in </title>
+	</head>
+	<body>
+		<h1>Successfully Signed in {{name}}</h1>
+		<h1>Account No. {{Acc}}</h1>
+		<h2>OTP Seed: {{otp}}</h2>
+		<canvas id="qr" style="width:200px;"></canvas>
+		<script src="{% static 'js/qrious.min.js' %}"></script>
+		<script>
+			(function() {
+				var qr = new QRious({
+					element: document.getElementById('qr'),
+					value: '{{ x }}'
+				});
+			})();
+		</script>
+		<h2>Balance {{bal}}</h2>
+		<p>
+			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+		 </p>
+	</body>
+</html>

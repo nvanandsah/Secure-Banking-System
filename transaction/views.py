@@ -22,13 +22,6 @@ def transaction(request):
                    }
         return render(request, "transaction/transaction.html", context)
      
-
-def verify_otp(self, otp):
-		if len(self.OTPseed) != 16:
-			raise BankingException('Invalid OTP State, authenticate again.')
-		totp = pyotp.TOTP(self.OTPseed)
-		return totp.verify(otp)
-
 @login_required()
 def trnsac(request):
     if not request.user.is_authenticated:
@@ -44,7 +37,10 @@ def trnsac(request):
             ammount_user=request.user.balance
            # print("ACC_NO"+int(account_no))
             OTP = form.cleaned_data.get("OTP")
-            if not verfiy_otp(OTP):
+            Userlog = request.user
+            totp = pyotp.TOTP(Userlog.OTPSeed)
+            print("Current OTP:", totp.now())
+            if not Userlog.verify_otp(OTP):
                 print('Invalid OTP')
             else:
                 if(ammount_user>amount):
@@ -55,7 +51,7 @@ def trnsac(request):
                             "Acc" :  request.user.acc_no,
                             "bal" :request.user.balance
                     }
-                    start_transact(request,request.user,r_name,"3",account_no,amount,message)  
+                    start_transact(request,request.user,r_name,"3",account_no,amount,message,OTP)  
                 else:
                     print('insuffiecient balance')
                     context = {"message": 'Error : Insufficient Balance',
@@ -136,7 +132,7 @@ def debit_money(request):
                    }
         return render(request, "transaction/debitmoney.html", context)
 
-def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
+def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message,OTP):
             if(Tr_type=='1'):
                 from_acc = user
                 if(from_acc!=None ):
@@ -149,6 +145,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="1",
+                                                OTP=OTP
                                                 )
                     transactions.save()
             if(Tr_type=='2'):
@@ -162,6 +159,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="2",
+                                                OTP=OTP
                                                 )
                     transactions.save()
             
@@ -185,6 +183,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="3",
+                                                OTP=OTP
                                                  )
                                 transactions.save()
                         else:
