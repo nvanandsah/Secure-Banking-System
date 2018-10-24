@@ -41,6 +41,13 @@ class User(AbstractUser):
             MaxValueValidator(99999999)
             ]
         )
+    OTPSeed = models.PositiveIntegerField(
+        unique=True,
+        validators=[
+            MinValueValidator(100000),
+            MaxValueValidator(999999)
+            ]
+        )
     gender = models.CharField(max_length=6, choices=G_CHOICE)
     email = models.EmailField(unique=True, blank=False)
     contact_no = models.IntegerField(unique=True)

@@ -4,11 +4,12 @@ from transaction.models import TX_in
 class trnsction(forms.ModelForm):
     class Meta:
         model = TX_in
-        fields = {
+        fields = {s
             "full_name",
             "acc_no",
             "Amount",
             "message",
+            "OTP"
         }
     def clean(self):
         cleaned_data = super(forms.ModelForm, self).clean()
@@ -16,7 +17,7 @@ class trnsction(forms.ModelForm):
         Account_No = cleaned_data.get('acc_no')
         Amount = cleaned_data.get('Amount')
         message = cleaned_data.get('message')
-        
+        OTP = cleaned_data.get('OTP')
         if not Name and not Account_No and not message:
             raise forms.ValidationError('You have to write something!')
 

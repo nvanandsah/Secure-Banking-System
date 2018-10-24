@@ -3,11 +3,16 @@ from django.contrib import messages
 from .forms import UserRegistrationForm, UserLoginForm
 from transaction.forms import trnsction
 from .models import User
+import pyotp
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
+def regenerate_OTPseed(self):
+    self.OTPseed = pyotp.random_base32()
+    self.save()
+    return pyotp.totp.TOTP(self.OTPseed).provisioning_uri(str(self.user.username), issuer_name='Mortal Stanley Bank')
 
 def signup(request):
     if request.user.is_authenticated:
@@ -27,6 +32,7 @@ def signup(request):
                     user.acc_no = largest + 1
                 else:
                     user.acc_no = 10000000
+                regenerate_OTPseed()
             print("bc")
             user.save()
             email, password = form.cleaned_data.get('email'), form.cleaned_data.get('password1')

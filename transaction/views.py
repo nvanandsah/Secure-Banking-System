@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import trnsction,addMoney,debitMoney
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 from .models import TX_in
+from random import randint
+import pyotp
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
 from django.contrib import messages
+
 @login_required()
 def transaction(request):
     if not (request.user.is_authenticated):
@@ -19,7 +21,13 @@ def transaction(request):
                    
                    }
         return render(request, "transaction/transaction.html", context)
-        
+     
+
+def verify_otp(self, otp):
+		if len(self.OTPseed) != 16:
+			raise BankingException('Invalid OTP State, authenticate again.')
+		totp = pyotp.TOTP(self.OTPseed)
+		return totp.verify(otp)
 
 @login_required()
 def trnsac(request):
@@ -35,29 +43,27 @@ def trnsac(request):
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
            # print("ACC_NO"+int(account_no))
-            
-            if(ammount_user>amount):
-                print('transaction possible')
-                #request.user.balance = request.user.balance - ammount
-                context = {"message": ' Khush hoja',
-                        "name" : request.user.full_name,
-                        "Acc" :  request.user.acc_no,
-                        "bal" :request.user.balance
-                   }
-                start_transact(request,request.user,r_name,"3",account_no,amount,message)
-
-                
+            OTP = form.cleaned_data.get("OTP")
+            if not verfiy_otp(OTP):
+                print('Invalid OTP')
             else:
-                print('insuffiecient balance')
-                context = {"message": 'Error : Insufficient Balance',
-                        "name" : request.user.full_name,
-                        "Acc" :  request.user.acc_no,
-                        "bal" :ammount_user
-                   
-                   }
-
-            #return redirect("home")
-                return render(request,"transaction/bal_insuff.html", context)
+                if(ammount_user>amount):
+                    print('transaction possible')
+                    #request.user.balance = request.user.balance - ammount
+                    context = {"message": ' Khush hoja',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :request.user.balance
+                    }
+                    start_transact(request,request.user,r_name,"3",account_no,amount,message)  
+                else:
+                    print('insuffiecient balance')
+                    context = {"message": 'Error : Insufficient Balance',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :ammount_user                    
+                    }
+                    return render(request,"transaction/bal_insuff.html", context)
         context = {"form": form,
                    "title": title
                    }

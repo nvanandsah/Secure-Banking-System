@@ -35,6 +35,12 @@ class TX_in(models.Model):
                     MaxValueValidator(100000)
                 ]
         )
+        OTP = models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(100000),
+                    MaxValueValidator(999999)
+                ]
+        )
         message = models.CharField(
                 max_length=256,
                 validators=[
