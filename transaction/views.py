@@ -99,7 +99,7 @@ def debit_money(request):
         return redirect("home")
     else:
         title = "Debit Money "
-        form = addMoney(request.POST or None)
+        form = debitMoney(request.POST or None)
         if form.is_valid():
             account_no = form.cleaned_data.get("acc_No")
             amount=form.cleaned_data.get("Amount")
