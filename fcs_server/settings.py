@@ -39,8 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'login',
+#    'djangosecure',
     'base',
+<<<<<<< HEAD
     'Internal',
+=======
+    'sslserver',
+>>>>>>> 940f904ed5c37079dd40cfa39959746b5bf0818b
     'transaction',
     'django_otp',
     'django_otp.plugins.otp_totp',
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+#    'djangosecure.middleware.SecurityMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,7 +74,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 SESSION_EXPIRE_AT_BROWSER_CLOSE= True
 SESSION_COOKIE_AGE = TIME    
 SESSION_IDLE_TIMEOUT = TIME 
-
+#SECURE_SSL_REDIRECT = False
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
