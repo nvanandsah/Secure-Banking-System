@@ -49,15 +49,34 @@ def delete_acc(request,UserID):
 
 def modify_acc(request,UserID):
     title = "Modify Account "
-    form = modifyacc(request.POST or None)
+    Userlog=User.objects.filter(id=UserID)
+    fullname=""
+    email=""
+    contact=0
+    addr=""
+    city=""
+    for i in Userlog:
+
+        fullname=i.full_name
+        email=i.email
+        addr=i.Address
+        contact=i.contact_no
+        city=i.city
+  
+    form = modifyacc(request.POST or None,initial={'full_name':fullname,'email':email,'Address':addr, 'contact_no':contact ,'city':city })
     if form.is_valid():
         full_name = form.cleaned_data.get('full_name')
         email = form.cleaned_data.get('email')
         contact_no=form.cleaned_data.get("contact_no")
         Address=form.cleaned_data.get("Address")
         city=form.cleaned_data.get("city")
+        print(UserID)
         User.objects.filter(id=UserID).update(full_name=full_name,email=email,contact_no=contact_no,Address=Address,city=city)
-    return render(request,"base/modify_acc.html")
+        return redirect("iaccount_handling")
+    context = {"form": form,
+                "title": title
+                   }
+    return render(request,"base/modify_acc.html",context)
     #return redirect("iaccount_handling")
 
 def approve_transaction(request,txID):
