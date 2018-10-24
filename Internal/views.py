@@ -63,7 +63,7 @@ def modify_acc(request,UserID):
         contact=i.contact_no
         city=i.city
   
-    form = modifyacc(request.POST or None,initial={'full_name':fullname,'email':email,'Address':addr, 'contact_no':contact ,'city':city })
+    form = modifyacc(request.POST or None,initial={'full_name':fullname,'email':email,'Address':addr, 'contact_no':contact ,'city':citys })
     if form.is_valid():
         full_name = form.cleaned_data.get('full_name')
         email = form.cleaned_data.get('email')
