@@ -126,10 +126,6 @@ def decline_transaction(request,txID):
     TX_in.objects.filter(id=txID).update(status="4")
     return redirect("ihome")
                     
-
-
-
-    
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
