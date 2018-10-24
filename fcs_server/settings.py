@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'login',
     'base',
+    'Internal',
     'transaction',
     'django_otp',
     'django_otp.plugins.otp_totp',
