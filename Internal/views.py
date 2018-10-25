@@ -42,7 +42,7 @@ def account_handling(request):
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 
 def delete_acc(request,UserID):
-    User.objects.filter(id=UserID).delete()
+    User.objects.filter(id=UserID).update(status="S")
     print(UserID)
     return redirect("iaccount_handling")
 def add_acc(request):
