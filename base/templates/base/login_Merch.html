@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>logged in </title>
+	</head>
+	<body>
+		<h1>Successfully logged in {{name}}</h1>
+        <h1>Account No. {{Acc}}</h1>
+        <h1> Welcome to Secure Bank </h1>
+		
+		<h2>Balance {{bal}}</h2>
+		<p>
+			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+			<a class="btn btn-primary btn-md" href="{% url 'addmoney' %}" role="button">Add Money</a>
+            <a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
+            <a class="btn btn-primary btn-md" href="{% url 'linkacc' %}" role="button">Link Money</a>
+		 </p>
+		 <table class="alt">
+			<thead>
+			<tr>
+				<th>To User</th>
+				<th>Account Number</th>
+				<th>Status</th>
+				<th>Amount</th>
+				<th>TXN_type</th>
+				
+			</tr>
+			</thead>
+			<tbody>
+			{% for i in trns %}
+				<tr>
+					<td>{{i.toUser.full_name}}</td>
+					<td>{{i.toUser}}</td>
+					<td>{{i.status}}</td>
+					<td>{{i.Amount}}</td>
+					<td>{{i.Tr_type}}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
