@@ -29,7 +29,9 @@
                 <th>acc_no</th>
                 <th>email</th>
 				<th>contact_no</th>
-                <th>balance</th>
+				<th>balance</th>
+				<th>status</th>
+				<th>designation</th>
 			
 				<th>Accept</th>
 				<th>Delete</th>
@@ -45,6 +47,8 @@
                     <td>{{i.email}}</td>
                     <td>{{i.contact_no}}</td>
 					<td>{{i.balance}}</td>
+					<td>{{i.status}}</td>
+					<td>{{i.designation}}</td>
 					
 					<td>
 							<a href="{% url 'modify_acc' i.id %}">Modify</a>

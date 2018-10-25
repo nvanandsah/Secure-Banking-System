@@ -19,6 +19,8 @@ def get_from_tuple(my_tuple, key):
     except StopIteration:
         return None
 
+
+
 # Create your views here.
 def home(request):
 	#print("Here in Employee"+request.user.is_authenticated)
@@ -39,6 +41,8 @@ def account_handling(request):
         return render(request,"base/home.html",{})
     else:
         arr = User.objects.all()
+        for i in arr:
+            i.status=get_from_tuple(User.STATUS, i.status)
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 
 def delete_acc(request,UserID):

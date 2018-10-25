@@ -42,10 +42,7 @@ INSTALLED_APPS = [
 #    'djangosecure',
     'base',
     'Internal',
-<<<<<<< HEAD
-=======
     'sslserver',
->>>>>>> 3d3cf638a6dd99cc6aa078cec966204ce6028f0f
     'transaction',
     'django_otp',
     'django_otp.plugins.otp_totp',
