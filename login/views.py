@@ -55,10 +55,10 @@ def signup(request):
 def _login(request):
     if request.user.is_authenticated:
         print(request.user.designation)
-        if request.user.designation=="employee":
+        if request.user.designation=="user":
             print("Emplyee")
-            return redirect("ihome")
-        return redirect("home")
+            return redirect("home")
+        return redirect("ihome")
     else:
         title = "Login "
         form = UserLoginForm(request.POST or None)

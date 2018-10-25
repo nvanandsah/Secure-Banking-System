@@ -38,6 +38,8 @@ def account_handling(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
+        if request.user.designation!="admin":
+            return redirect("home")
         arr = User.objects.all()
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 

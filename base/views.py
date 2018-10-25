@@ -16,7 +16,7 @@ def home(request):
 		return render(request,"base/home.html",{})
 	else:
 		#arr = TX_in.objects.filter(acc_no=request.user.acc_no)
-		if request.user.designation=="employee":
+		if request.user.designation!="user":
 			return redirect("ihome")
 		arr = TX_in.objects.filter(fromUser_id=request.user.id)
 		print(arr)
