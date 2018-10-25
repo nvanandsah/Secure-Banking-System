@@ -55,6 +55,12 @@ class User(AbstractUser):
         decimal_places=2
         )
     objects = UserManager()
+    STATUS = (
+            ('O', "Active"),
+           
+            ('S', "Suspended"),
+        )
+    status = models.CharField(max_length=1, choices=STATUS,default="O")
     designation = models.CharField(max_length=25, choices=D_CHOICE)
     USERNAME_FIELD = 'email'  # use email to log in
     REQUIRED_FIELDS = []  # required when user is created

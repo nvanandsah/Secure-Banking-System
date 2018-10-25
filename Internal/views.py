@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from login.forms import UserRegistrationForm, UserLoginForm
-from .forms import modifyacc
+from Internal.forms import modifyacc,addacc
 from login.models import User
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
@@ -18,6 +18,8 @@ def get_from_tuple(my_tuple, key):
         return next(y for x, y in my_tuple if x == key)
     except StopIteration:
         return None
+
+
 
 # Create your views here.
 def home(request):
@@ -39,12 +41,42 @@ def account_handling(request):
         return render(request,"base/home.html",{})
     else:
         arr = User.objects.all()
+        for i in arr:
+            i.status=get_from_tuple(User.STATUS, i.status)
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 
 def delete_acc(request,UserID):
-    User.objects.filter(id=UserID).delete()
+    User.objects.filter(id=UserID).update(status="S")
     print(UserID)
     return redirect("iaccount_handling")
+def add_acc(request):
+    title = "Create a Bank Account"
+    form = UserRegistrationForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        password = form.cleaned_data.get("password1")
+        user.set_password(password)
+        if not user.acc_no:
+            largest = User.objects.all().aggregate(
+                Max("acc_no")
+                )['acc_no__max']
+            if largest:
+                user.acc_no = largest + 1
+            else:
+                user.acc_no = 10000000
+            x,y = user.regenerate_OTPseed()
+            print(x)
+        print("bc")
+        user.save()
+        email, password = form.cleaned_data.get('email'), form.cleaned_data.get('password1')
+        user = authenticate(username=email, password=password)
+        print(user)
+        #return render(request,"base/loggedin.html",{'name':email, 'Acc':user.acc_no,'Pass':password})
+        return redirect("iaccount_handling")
+
+    context = {"title": title, "form": form}
+    return render(request,"base/add_acc.html",context)
+
 
 
 def modify_acc(request,UserID):

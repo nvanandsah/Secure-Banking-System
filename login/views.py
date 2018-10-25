@@ -70,9 +70,20 @@ def _login(request):
             user_obj = user_obj.first()
             password = form.cleaned_data.get("password")
             user = authenticate(email=user_obj.email, password=password)
-            login(request, user)
+            if(user.status=="O"):
+                login(request, user)
             #messages.success(request, 'Welcome, {}!' .format(user.full_name))
-            return redirect("home")
+                return redirect("home")
+            else:
+                
+                context = {"form": form,
+                   "title": title,
+                   "message":"ur acc is suspended by admin",
+                   
+                   }
+                
+                return render(request, "login/form.html", context)
+
         context = {"form": form,
                    "title": title
                    }

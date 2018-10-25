@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'login',
 #    'djangosecure',
     'base',
+    'Internal',
     'sslserver',
     'transaction',
     'django_otp',
