@@ -17,10 +17,10 @@ G_CHOICE = (
     ("Female", "Female"),
     )
 D_CHOICE = (
-			("user", "permission to do account operations"),
-			("merchant", "create payments for their users"),
-			("employee", "check the employee dashboard"),
-			("manager", "Manager/Staff, critical transactions"),
+			("user", "User: permission to do account operations"),
+			("merchant", "Merchant:create payments for their users"),
+			("employee", "Employee: check the employee dashboard"),
+			("manager", "Manager : Manager/Staff, critical transactions"),
 			("admin", "admin"),
 		)
 class User(AbstractUser):

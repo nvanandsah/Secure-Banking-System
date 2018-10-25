@@ -16,13 +16,19 @@ def home(request):
 		return render(request,"base/home.html",{})
 	else:
 		#arr = TX_in.objects.filter(acc_no=request.user.acc_no)
-		if request.user.designation=="employee":
+		if request.user.designation!="user":
 			return redirect("ihome")
 		arr = TX_in.objects.filter(fromUser_id=request.user.id)
+		CHOICE = (
+    		("1", "Debit"),
+    		("2", "Credit"),
+			("3", "Transfer"),
+    	)
 		print(arr)
 		print(request.user.id)
 		for i in arr:
 			i.status=get_from_tuple(TX_in.STATUS, i.status)
+			i.Tr_type=get_from_tuple(CHOICE, i.Tr_type)
 #		return render(request,"base/SignupSuccess.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance, 'trns':arr, 'otp':request.user.OTPSeed})
 #def loggedinPage(request):
 		return render(request,"base/loggedin.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance, 'trns':arr})

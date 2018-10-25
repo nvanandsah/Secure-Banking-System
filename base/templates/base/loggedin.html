@@ -13,6 +13,8 @@
 		<p>
 			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+			<a class="btn btn-primary btn-md" href="{% url 'addmoney' %}" role="button">Add Money</a>
+			<a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
 		 </p>
 		 <table class="alt">
 			<thead>
@@ -21,6 +23,7 @@
 				<th>Account Number</th>
 				<th>Status</th>
 				<th>Amount</th>
+				<th>TXN_type</th>
 				
 			</tr>
 			</thead>
@@ -31,6 +34,7 @@
 					<td>{{i.toUser}}</td>
 					<td>{{i.status}}</td>
 					<td>{{i.Amount}}</td>
+					<td>{{i.Tr_type}}</td>
 				</tr>
 			{% endfor %}
 			</tbody>

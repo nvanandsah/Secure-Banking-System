@@ -14,8 +14,8 @@
 				{% endfor %}
 			</ul>
 			{% endif %}
-        <h1>Successfully logged in {{name}}</h1>
-        <h2>Logged in as an Employee</h2>
+        <h1>Successfully logged in {{name.email}}</h1>
+        <h2>Logged in as an {{name.designation}}</h2>
 		<p>
 			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>

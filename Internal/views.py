@@ -29,27 +29,41 @@ def home(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
-        arr = TX_in.objects.all()
+        if request.user.designation=="user":
+            return redirect("home")
+
+        if request.user.designation=="employee":
+            arr=TX_in.objects.filter(Amount__lte=100000)
+        else:
+            arr = TX_in.objects.all()
         #print(arr)
         for i in arr:
             i.status=get_from_tuple(TX_in.STATUS, i.status)
-        return render(request,"base/loggedInEmployee.html",{'name' : request.user.email,'trns':arr})
+            
+        return render(request,"base/loggedInEmployee.html",{'name' : request.user,'trns':arr})
 
 # Create your views here.
 def account_handling(request):
-    if not (request.user.is_authenticated):
+    if not (request.user.is_authenticated ):
         return render(request,"base/home.html",{})
     else:
+        if request.user.designation!="admin":
+            return redirect("home")
         arr = User.objects.all()
         for i in arr:
             i.status=get_from_tuple(User.STATUS, i.status)
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 
 def delete_acc(request,UserID):
+    if request.user.designation!="admin":
+        return redirect("home")
     User.objects.filter(id=UserID).update(status="S")
     print(UserID)
     return redirect("iaccount_handling")
+
 def add_acc(request):
+    if request.user.designation!="admin":
+        return redirect("home")
     title = "Create a Bank Account"
     form = UserRegistrationForm(request.POST or None)
     if form.is_valid():
@@ -80,6 +94,8 @@ def add_acc(request):
 
 
 def modify_acc(request,UserID):
+    if request.user.designation!="admin":
+        return redirect("home")
     title = "Modify Account "
     Userlog=User.objects.filter(id=UserID)
     fullname=""
@@ -112,6 +128,8 @@ def modify_acc(request,UserID):
     #return redirect("iaccount_handling")
 
 def approve_transaction(request,txID):
+    if request.user.designation=="user":
+        return redirect("home")
     print(txID)
     arr = TX_in.objects.filter(id=txID)
     for i in arr:
@@ -155,6 +173,8 @@ def approve_transaction(request,txID):
     return redirect("ihome")
 
 def decline_transaction(request,txID):
+    if request.user.designation=="user":
+        return redirect("home")
     TX_in.objects.filter(id=txID).update(status="4")
     return redirect("ihome")
                     
