@@ -10,7 +10,7 @@ from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
-
+from Crypto.PublicKey import RSA
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -30,6 +30,8 @@ def signup(request):
                 else:
                     user.acc_no = 10000000
                 x,y = user.regenerate_OTPseed()
+                key_pair = RSA.generate(1024)
+                private_key = open("privatekey.pem", "w")
                 print(x)
             print("bc")
             user.save()
