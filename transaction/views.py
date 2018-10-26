@@ -14,6 +14,8 @@ def transaction(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         context = {
                         "name" : request.user.full_name,
                         "Acc" :  request.user.acc_no,
@@ -27,6 +29,8 @@ def trnsac(request):
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Transaction "
         form = trnsction(request.POST or None)
         if form.is_valid():
@@ -71,6 +75,8 @@ def add_money(request): #2
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Add Money "
         form = addMoney(request.POST or None)
         if form.is_valid():
@@ -119,6 +125,8 @@ def debit_money(request): #1
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Debit Money "
         form = debitMoney(request.POST or None)
         if form.is_valid():
@@ -145,7 +153,6 @@ def debit_money(request): #1
                         context = {"message": 'Pls wait 24hrs to complete transaction',
                             "Acc" : request.user.acc_no,
                             "bal" :ammount_user
-
                         }
                         return redirect("home")
                 else:

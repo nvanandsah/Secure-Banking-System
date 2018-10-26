@@ -5,7 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
 class UserRegistrationForm(UserCreationForm):
-
     class Meta:
         model = User
         fields = ["full_name",
@@ -15,6 +14,27 @@ class UserRegistrationForm(UserCreationForm):
                   "Address",
                   "city",
                   "designation",
+                  "password1",
+                  "password2"
+                  ]
+
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['full_name']
+        if commit:
+            user.save()
+        return user
+
+class EmployeeRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["full_name",
+                  "gender",
+                  "email",
+                  "contact_no",
+                  "Address",
+                  "city",
                   "password1",
                   "password2"
                   ]

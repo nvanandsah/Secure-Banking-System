@@ -10,7 +10,6 @@ from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
-from Crypto.PublicKey import RSA
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -43,7 +42,6 @@ def signup(request):
                 return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y})
             else:
                 return redirect("home")
-
         else:
             print(form.is_valid())
         context = {"title": title, "form": form}
@@ -68,15 +66,11 @@ def _login(request):
             #messages.success(request, 'Welcome, {}!' .format(user.full_name))
                 return redirect("home")
             else:
-                
                 context = {"form": form,
                    "title": title,
                    "message":"ur acc is suspended by admin",
-                   
                    }
-                
                 return render(request, "login/form.html", context)
-
         context = {"form": form,
                    "title": title
                    }

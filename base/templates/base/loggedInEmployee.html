@@ -14,7 +14,7 @@
 				{% endfor %}
 			</ul>
 			{% endif %}
-        <h1>Successfully logged in {{name.email}}</h1>
+        <h1>Successfully logged in as {{name.full_name}}</h1>
         <h2>Logged in as an {{name.designation}}</h2>
 		<p>
 			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
@@ -26,9 +26,10 @@
                 <th>From User</th>
                 <th>From User Name</th>
                 <th>To User</th>
-				<th>From User Name</th>
+				<th>to User Name</th>
                 <th>Status</th>
 				<th>Amount</th>
+				<th>Transaction type</th>
 				<th>Accept</th>
 				<th>Decline</th>
 				
@@ -43,6 +44,7 @@
                     <td>{{i.toUser.full_name}}</td>
 					<td>{{i.status}}</td>
 					<td>{{i.Amount}}</td>
+					<td>{{i.Tr_type}}</td>
 					{% if i.status != "Approved" %}
 					{% if i.status != "Rejection" %}
 					{% if i.status == "Error_Occured"%}

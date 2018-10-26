@@ -12,7 +12,6 @@ class addacc(forms.Form):
                   "contact_no",
                   "Address",
                   "city",
-                  "designation",
                   "password1",
                   "password2"
                   ]

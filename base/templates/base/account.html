@@ -29,11 +29,9 @@
                 <th>acc_no</th>
                 <th>email</th>
 				<th>contact_no</th>
-				<th>balance</th>
 				<th>status</th>
 				<th>designation</th>
-			
-				<th>Accept</th>
+				<th>Modify</th>
 				<th>Delete</th>
 				
 			</tr>
@@ -46,7 +44,6 @@
                     <td>{{i.acc_no}}</td>
                     <td>{{i.email}}</td>
                     <td>{{i.contact_no}}</td>
-					<td>{{i.balance}}</td>
 					<td>{{i.status}}</td>
 					<td>{{i.designation}}</td>
 					
@@ -54,14 +51,19 @@
 							<a href="{% url 'modify_acc' i.id %}">Modify</a>
 					</td>
 					
-
+					{% if i.status != "Suspended" %}
 					<td>
 						<a href="{% url 'delete_acc' i.id %}">Delete</a>
 					</td>
+					{% endif %}
+					{% if i.status == "Suspended" %}
+					<td>
+						<a href="{% url 'delete_acc' i.id %}">Re-Activate</a>
+					</td>
+					{% endif %}
 			
 					{% endif %}
 
-					
 				
 				</tr>
 			{% endfor %}
