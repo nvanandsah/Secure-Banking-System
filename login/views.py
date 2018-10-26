@@ -42,11 +42,7 @@ def signup(request):
             if(user.designation == "user"):
                 return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y})
             else:
-                arr = TX_in.objects.all()
-                #print(arr)
-                for i in arr:
-                    i.status=get_from_tuple(TX_in.STATUS, i.status)
-                return render(request,"base/loggedInEmployee.html",{'name' : request.user.email,'trns':arr})
+                return redirect("home")
 
         else:
             print(form.is_valid())
@@ -57,9 +53,6 @@ def signup(request):
 def _login(request):
     if request.user.is_authenticated:
         print(request.user.designation)
-        if request.user.designation=="employee":
-            print("Emplyee")
-            return redirect("ihome")
         return redirect("home")
     else:
         title = "Login "
