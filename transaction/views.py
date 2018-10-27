@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import trnsction,addMoney,debitMoney
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 from .models import TX_in
+from random import randint
+import pyotp
 import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
 from django.contrib import messages
+
 @login_required()
 def transaction(request):
     if not (request.user.is_authenticated):
@@ -19,8 +21,7 @@ def transaction(request):
                    
                    }
         return render(request, "transaction/transaction.html", context)
-        
-
+     
 @login_required()
 def trnsac(request):
     if not request.user.is_authenticated:
@@ -35,29 +36,30 @@ def trnsac(request):
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
            # print("ACC_NO"+int(account_no))
-            
-            if(ammount_user>amount):
-                print('transaction possible')
-                #request.user.balance = request.user.balance - ammount
-                context = {"message": ' Khush hoja',
-                        "name" : request.user.full_name,
-                        "Acc" :  request.user.acc_no,
-                        "bal" :request.user.balance
-                   }
-                start_transact(request,request.user,r_name,"3",account_no,amount,message)
-
-                
+            OTP = form.cleaned_data.get("OTP")
+            Userlog = request.user
+            totp = pyotp.TOTP(Userlog.OTPSeed)
+            print("Current OTP:", totp.now())
+            if not Userlog.verify_otp(OTP):
+                print('Invalid OTP')
             else:
-                print('insuffiecient balance')
-                context = {"message": 'Error : Insufficient Balance',
-                        "name" : request.user.full_name,
-                        "Acc" :  request.user.acc_no,
-                        "bal" :ammount_user
-                   
-                   }
-
-            #return redirect("home")
-                return render(request,"transaction/bal_insuff.html", context)
+                if(ammount_user>amount):
+                    print('transaction possible')
+                    #request.user.balance = request.user.balance - ammount
+                    context = {"message": ' Khush hoja',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :request.user.balance
+                    }
+                    start_transact(request,request.user,r_name,"3",account_no,amount,message,OTP)  
+                else:
+                    print('insuffiecient balance')
+                    context = {"message": 'Error : Insufficient Balance',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :ammount_user                    
+                    }
+                    return render(request,"transaction/bal_insuff.html", context)
         context = {"form": form,
                    "title": title
                    }
@@ -97,7 +99,7 @@ def debit_money(request):
         return redirect("home")
     else:
         title = "Debit Money "
-        form = addMoney(request.POST or None)
+        form = debitMoney(request.POST or None)
         if form.is_valid():
             account_no = form.cleaned_data.get("acc_No")
             amount=form.cleaned_data.get("Amount")
@@ -130,7 +132,7 @@ def debit_money(request):
                    }
         return render(request, "transaction/debitmoney.html", context)
 
-def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
+def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message,OTP):
             if(Tr_type=='1'):
                 from_acc = user
                 if(from_acc!=None ):
@@ -143,6 +145,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="1",
+                                                OTP=OTP
                                                 )
                     transactions.save()
             if(Tr_type=='2'):
@@ -156,6 +159,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="2",
+                                                OTP=OTP
                                                 )
                     transactions.save()
             
@@ -179,6 +183,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message):
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="3",
+                                                OTP=OTP
                                                  )
                                 transactions.save()
                         else:

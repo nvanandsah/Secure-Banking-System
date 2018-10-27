@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from login.forms import UserRegistrationForm, UserLoginForm
+from Internal.forms import modifyacc,addacc
 from login.models import User
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
@@ -9,7 +10,7 @@ from django.contrib.auth import (authenticate,
                                  )
 from django.shortcuts import render
 from transaction.models import TX_in
-from login.models import User
+
 
 
 def get_from_tuple(my_tuple, key):
@@ -17,6 +18,8 @@ def get_from_tuple(my_tuple, key):
         return next(y for x, y in my_tuple if x == key)
     except StopIteration:
         return None
+
+
 
 # Create your views here.
 def home(request):
@@ -34,22 +37,79 @@ def home(request):
 
 # Create your views here.
 def account_handling(request):
-	#print("Here in Employee"+request.user.is_authenticated)
-	#print(request.user.email)
-	#print(request.user.acc_no)
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
         arr = User.objects.all()
+        for i in arr:
+            i.status=get_from_tuple(User.STATUS, i.status)
         return render(request,"base/account.html",{'name' : request.user ,'arr':arr })
 
 def delete_acc(request,UserID):
-    User.objects.filter(id=UserID).delete()
+    User.objects.filter(id=UserID).update(status="S")
     print(UserID)
     return redirect("iaccount_handling")
+def add_acc(request):
+    title = "Create a Bank Account"
+    form = UserRegistrationForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        password = form.cleaned_data.get("password1")
+        user.set_password(password)
+        if not user.acc_no:
+            largest = User.objects.all().aggregate(
+                Max("acc_no")
+                )['acc_no__max']
+            if largest:
+                user.acc_no = largest + 1
+            else:
+                user.acc_no = 10000000
+            x,y = user.regenerate_OTPseed()
+            print(x)
+        print("bc")
+        user.save()
+        email, password = form.cleaned_data.get('email'), form.cleaned_data.get('password1')
+        user = authenticate(username=email, password=password)
+        print(user)
+        #return render(request,"base/loggedin.html",{'name':email, 'Acc':user.acc_no,'Pass':password})
+        return redirect("iaccount_handling")
+
+    context = {"title": title, "form": form}
+    return render(request,"base/add_acc.html",context)
 
 
 
+def modify_acc(request,UserID):
+    title = "Modify Account "
+    Userlog=User.objects.filter(id=UserID)
+    fullname=""
+    email=""
+    contact=0
+    addr=""
+    city=""
+    for i in Userlog:
+
+        fullname=i.full_name
+        email=i.email
+        addr=i.Address
+        contact=i.contact_no
+        city=i.city
+  
+    form = modifyacc(request.POST or None,initial={'full_name':fullname,'email':email,'Address':addr, 'contact_no':contact ,'city':citys })
+    if form.is_valid():
+        full_name = form.cleaned_data.get('full_name')
+        email = form.cleaned_data.get('email')
+        contact_no=form.cleaned_data.get("contact_no")
+        Address=form.cleaned_data.get("Address")
+        city=form.cleaned_data.get("city")
+        print(UserID)
+        User.objects.filter(id=UserID).update(full_name=full_name,email=email,contact_no=contact_no,Address=Address,city=city)
+        return redirect("iaccount_handling")
+    context = {"form": form,
+                "title": title
+                   }
+    return render(request,"base/modify_acc.html",context)
+    #return redirect("iaccount_handling")
 
 def approve_transaction(request,txID):
     print(txID)
@@ -98,10 +158,6 @@ def decline_transaction(request,txID):
     TX_in.objects.filter(id=txID).update(status="4")
     return redirect("ihome")
                     
-
-
-
-    
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")

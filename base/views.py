@@ -23,4 +23,6 @@ def home(request):
 		print(request.user.id)
 		for i in arr:
 			i.status=get_from_tuple(TX_in.STATUS, i.status)
+#		return render(request,"base/SignupSuccess.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance, 'trns':arr, 'otp':request.user.OTPSeed})
+#def loggedinPage(request):
 		return render(request,"base/loggedin.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance, 'trns':arr})

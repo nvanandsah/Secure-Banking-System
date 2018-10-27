@@ -4,7 +4,15 @@
 
 {% block content %}
 {% include "base/messages.html" %}
-<h2>{{ title }}</h2><hr>
+<h2>Add account for ext users</h2><hr>
+
+{% if messages %}
+	<ul class="messages">
+	{% for message in messages %}
+		<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
 <form method="POST" action="" enctype='multipart/form-data'>
     {% csrf_token %}
     {{ form|crispy }}
@@ -12,6 +20,5 @@
     <input class="btn btn-success" type="submit" value='Submit'>
 </form>
 {{ form.errors }}
-<h2><b>{{message}}</b></h2>
 {{ form.non_field_errors }}
 {% endblock content %}
