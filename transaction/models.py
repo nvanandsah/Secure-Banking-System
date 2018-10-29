@@ -67,6 +67,8 @@ class TX_in(models.Model):
        # last_changed_time = models.DateTimeField(auto_now=True)
 
         #@staticmethod
+
+
         
 
                     

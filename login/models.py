@@ -23,6 +23,8 @@ D_CHOICE = (
 			("manager", "Manager : Manager/Staff, critical transactions"),
 			("admin", "admin"),
 		)
+
+   
 class User(AbstractUser):
     username = None
     full_name = models.CharField(
@@ -57,7 +59,6 @@ class User(AbstractUser):
     objects = UserManager()
     STATUS = (
             ('O', "Active"),
-           
             ('S', "Suspended"),
         )
     status = models.CharField(max_length=1, choices=STATUS,default="O")
@@ -95,5 +96,7 @@ class User(AbstractUser):
         totp = pyotp.TOTP((self.OTPSeed))
         print(self.OTPSeed)
         return totp.verify(otp)
+    
+
 
 

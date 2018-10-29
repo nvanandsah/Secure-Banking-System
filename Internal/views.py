@@ -4,6 +4,7 @@ from login.forms import UserRegistrationForm, UserLoginForm,EmployeeRegistration
 from Internal.forms import modifyacc,addacc
 from login.models import User
 from django.db.models import Max
+from base.models import ModifiedUser
 from django.contrib.auth import (authenticate,
                                  login,
                                  logout
@@ -113,7 +114,6 @@ def add_acc(request):
         return render(request,"base/add_acc.html",context)
 
 
-
 def modify_acc(request,UserID):
     if not (request.user.is_authenticated ):
         return render(request,"base/home.html",{})
@@ -147,6 +147,7 @@ def modify_acc(request,UserID):
                    }
     return render(request,"base/modify_acc.html",context)
     #return redirect("iaccount_handling")
+
 
 def approve_transaction(request,txID):
     if not (request.user.is_authenticated ):
@@ -208,6 +209,20 @@ def decline_transaction(request,txID):
             return redirect("home")
     TX_in.objects.filter(id=txID).update(status="4")
     return redirect("ihome")
+
+def user_requests(request):
+    if not request.user.is_authenticated:
+        return redirect("home")
+    if request.user.designation!="admin":
+        return redirect("home")
+    print("Inside ")
+    changes=ModifiedUser.objects.filter(isModified="1")
+    users=[]
+    for i in changes:
+        users.append(User.objects.filter(acc_no=i.acc_no)[0])
+    return render(request,"base/modify_request_admin.html",{'changes':changes,'users':users})
+    
+    
                     
 def signup(request):
     if request.user.is_authenticated:

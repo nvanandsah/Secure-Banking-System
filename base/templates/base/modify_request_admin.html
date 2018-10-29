@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+
+{% block title %} {{ block.super }}{% endblock title %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="container" style="padding-top: 50px;">
+<div class="jumbotron text-center">
+	<div style="float:right">
+      <h2>Modified</h2>
+		 <table class="alt">
+			<thead>
+			<tr>
+                <th>Full Name</th>
+                <th>City</th>
+				<th>Contact</th>
+				<th>Address</th>
+				<th>Email</th>
+				<th>Accept</th>
+				<th>Decline</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for i in changes %}
+				<tr>
+                    <td>{{i.full_name}}</td>
+					<td>{{i.city}}</td>
+					<td>{{i.contact_no}}</td>
+					<td>{{i.Address}}</td>
+					<td>{{i.email}}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="float:left">
+
+		<h2>Original </h2>
+		<table class="alt">
+		   <thead>
+		   <tr>
+			   <th >Full Name</th>
+			   <th>City</th>
+			   <th>Contact</th>
+			   <th>Address</th>
+			   <th>Email</th>
+
+		   </tr>
+		   </thead>
+		   <tbody>
+		
+		   {% for i in users %}
+			   <tr>
+				   <td>{{i.full_name}}</td>
+				   <td>{{i.city}}</td>
+				   <td>{{i.contact_no}}</td>
+				   <td>{{i.Address}}</td>
+				   <td>{{i.email}}</td>
+			   </tr>
+		   {% endfor %}
+		   </tbody>
+	   </table>
+	</div>
+</div>
+</div>
+
+{% endblock content %}
