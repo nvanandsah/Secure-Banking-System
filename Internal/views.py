@@ -210,6 +210,26 @@ def decline_transaction(request,txID):
     TX_in.objects.filter(id=txID).update(status="4")
     return redirect("ihome")
 
+def approve_change_request(request,accNo):
+    if not request.user.is_authenticated:
+        return redirect("home")
+    if request.user.designation!="admin":
+        return redirect("home")
+    c=ModifiedUser.objects.filter(acc_no=accNo)[0]
+    ModifiedUser.objects.filter(acc_no=accNo).update(isModified="2")
+    User.objects.filter(acc_no=accNo).update(full_name=c.full_name,email=c.email,Address=c.Address,city=c.city,contact_no=c.contact_no)
+    return redirect("userRequests")
+
+
+def decline_change_request(request,accNo):
+    if not request.user.is_authenticated:
+        return redirect("home")
+    if request.user.designation!="admin":
+        return redirect("home")
+    ModifiedUser.objects.filter(acc_no=accNo).update(isModified="3")
+    return redirect("userRequests")
+
+
 def user_requests(request):
     if not request.user.is_authenticated:
         return redirect("home")

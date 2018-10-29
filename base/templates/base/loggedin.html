@@ -18,6 +18,7 @@
 			<a class="btn btn-primary btn-md" href="{% url 'modify_acc' %}" role="button">Modify Account </a>
 
 		</p>
+		<h2>Transactions</h2>
 		 <table class="alt">
 			<thead>
 			<tr>
@@ -40,6 +41,34 @@
 				</tr>
 			{% endfor %}
 			</tbody>
+
 		</table>
+
+		<h2>Modification Requests</h2>
+		<table class="alt">
+				<thead>
+				<tr>
+						<th>Full Name</th>
+						<th>City</th>
+						<th>Contact</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>Status</th>
+				</tr>
+				</thead>
+				<tbody>
+						{% for i in changes %}
+							<tr>
+								<td>{{i.full_name}}</td>
+								<td>{{i.city}}</td>
+								<td>{{i.contact_no}}</td>
+								<td>{{i.Address}}</td>
+								<td>{{i.email}}</td>
+								<td>{{i.isModified}}</td>
+							</tr>
+						{% endfor %}
+				</tbody>
+
+		
 	</body>
 </html>

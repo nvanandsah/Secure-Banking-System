@@ -10,6 +10,8 @@ from django.core.validators import (
 REGEX = '^[a-zA-Z ]*$'
 alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
+
+
 class ModifiedUser(models.Model):
     full_name = models.CharField(
         max_length=256,
@@ -32,7 +34,7 @@ class ModifiedUser(models.Model):
     contact_no = models.IntegerField(unique=True)
     Address = models.CharField(max_length=512)
     city = models.CharField(max_length=256)
-    isModified=models.CharField(max_length=1,default="0")
+    isModified=models.CharField(max_length=1,default="0") #1: initiated 2:approved 3:declined
     def __str__(self):
         return str(self.acc_no)
 

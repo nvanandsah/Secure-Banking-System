@@ -34,6 +34,8 @@
 					<td>{{i.contact_no}}</td>
 					<td>{{i.Address}}</td>
 					<td>{{i.email}}</td>
+					<td><a href="{% url 'approveChangeRequest' i.acc_no %}">Approve</a></td>
+					<td><a href="{% url 'declineChangeRequest' i.acc_no %}">Decline</a></td>
 				</tr>
 			{% endfor %}
 			</tbody>

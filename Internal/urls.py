@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from .views import home,_login,signup,logout
-from Internal.views import approve_transaction,decline_transaction,account_handling,delete_acc,add_acc,modify_acc,user_requests
+from Internal.views import approve_transaction,decline_transaction,account_handling,delete_acc,add_acc,modify_acc,user_requests,approve_change_request,decline_change_request
 urlpatterns = [
 	url(r'^$',home,name="ihome"),
 	url(r'^login/',_login,name="ilogin"),
@@ -18,4 +18,9 @@ urlpatterns = [
 	    name='add_acc'),
 	url(r'^modify_acc/(?P<UserID>[0-9]+)', modify_acc,
         name='modify_acc'),
+	url(r'^approve_change_request/(?P<accNo>[0-9]+)', approve_change_request,
+        name='approveChangeRequest'),
+	url(r'^decline_change_request/(?P<accNo>[0-9]+)', decline_change_request,
+        name='declineChangeRequest'),
+		
 ]
