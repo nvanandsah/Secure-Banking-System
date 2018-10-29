@@ -43,6 +43,7 @@ class trnsction(forms.ModelForm):
 class addMoney(forms.Form):
     Amount = forms.IntegerField(label="Amount")
     acc_no = forms.IntegerField(label="acc_no")
+    OTP=forms.IntegerField(label="OTP")
     message = forms.CharField(
         max_length=2000,
         widget=forms.Textarea(),
@@ -52,6 +53,7 @@ class addMoney(forms.Form):
         amount = self.cleaned_data.get('Amount')
         message = self.cleaned_data.get('message')
         acc_no=self.cleaned_data.get("acc_no")
+        OTP = self.cleaned_data.get('OTP')
         if amount and not message:
             raise forms.ValidationError('You have to write something!')
 
@@ -78,6 +80,7 @@ class addMoney(forms.Form):
 class debitMoney(forms.Form):
     Amount = forms.IntegerField(label="Amount")
     acc_no = forms.IntegerField(label="acc_no")
+    OTP=forms.IntegerField(label="OTP")
     message = forms.CharField(
         max_length=2000,
         widget=forms.Textarea(),
@@ -87,6 +90,7 @@ class debitMoney(forms.Form):
         amount = self.cleaned_data.get('Amount')
         message = self.cleaned_data.get('message')
         acc_no=self.cleaned_data.get("acc_no")
+        OTP = self.cleaned_data.get('OTP')
         if amount and not message:
             raise forms.ValidationError('You have to write something!')
             

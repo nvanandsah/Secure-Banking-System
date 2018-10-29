@@ -17,12 +17,14 @@ G_CHOICE = (
     ("Female", "Female"),
     )
 D_CHOICE = (
-			("user", "permission to do account operations"),
-			("merchant", "create payments for their users"),
-			("employee", "check the employee dashboard"),
-			("manager", "Manager/Staff, critical transactions"),
+			("user", "User: permission to do account operations"),
+			("merchant", "Merchant:create payments for their users"),
+			("employee", "Employee: check the employee dashboard"),
+			("manager", "Manager : Manager/Staff, critical transactions"),
 			("admin", "admin"),
 		)
+
+   
 class User(AbstractUser):
     username = None
     full_name = models.CharField(
@@ -57,10 +59,10 @@ class User(AbstractUser):
     objects = UserManager()
     STATUS = (
             ('O', "Active"),
-           
             ('S', "Suspended"),
         )
     status = models.CharField(max_length=1, choices=STATUS,default="O")
+    linked=models.CharField(max_length=1000, choices=STATUS,default="O")
     designation = models.CharField(max_length=25, choices=D_CHOICE)
     USERNAME_FIELD = 'email'  # use email to log in
     REQUIRED_FIELDS = []  # required when user is created
@@ -94,5 +96,7 @@ class User(AbstractUser):
         totp = pyotp.TOTP((self.OTPSeed))
         print(self.OTPSeed)
         return totp.verify(otp)
+    
+
 
 

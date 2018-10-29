@@ -14,6 +14,8 @@ def transaction(request):
     if not (request.user.is_authenticated):
         return render(request,"base/home.html",{})
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         context = {
                         "name" : request.user.full_name,
                         "Acc" :  request.user.acc_no,
@@ -27,6 +29,8 @@ def trnsac(request):
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Transaction "
         form = trnsction(request.POST or None)
         if form.is_valid():
@@ -40,6 +44,14 @@ def trnsac(request):
             Userlog = request.user
             totp = pyotp.TOTP(Userlog.OTPSeed)
             print("Current OTP:", totp.now())
+            count=User.objects.filter(acc_no=account_no).count()
+            if count==0:
+                context = {"message": 'Error : Account number entered doesnt exist',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :ammount_user                    
+                    }
+                return render(request,"transaction/bal_insuff.html", context)
             if not Userlog.verify_otp(OTP):
                 print('Invalid OTP')
             else:
@@ -67,69 +79,112 @@ def trnsac(request):
     
 
 @login_required()
-def add_money(request):
+def add_money(request): #2
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Add Money "
         form = addMoney(request.POST or None)
         if form.is_valid():
-            account_no = form.cleaned_data.get("acc_No")
+            account_no = form.cleaned_data.get("acc_no")
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
             #makepay=request.user.do_transaction(0,amount)
-            start_transact(request,request.user,request.user.full_name,"2",account_no,amount,message)
-            context = {"message": 'Pls wait 24hrs to complete transaction',
-                        "Acc" : request.user.acc_no,
-                        "bal" :ammount_user
-
+            if (account_no==request.user.acc_no):
+                OTP = form.cleaned_data.get("OTP")
+                Userlog = request.user
+                totp = pyotp.TOTP(Userlog.OTPSeed)
+                print("Current OTP:", totp.now())
+                if not Userlog.verify_otp(OTP):
+                    print('Invalid OTP')
+                    context = {"form": form,
+                            "title": title,
+                            "message":"Invalid OTP"
                     }
+                    return render(request, "transaction/addmoney_own.html", context)
+                else:
+                    start_transact(request,request.user,request.user.full_name,"2",account_no,amount,message,OTP)
+                    context = {"message": 'Pls wait 24hrs to complete transaction',
+                            "Acc" : request.user.acc_no,
+                            "bal" :ammount_user
 
-            return redirect("home")
+                     }
+
+                    return redirect("home")
+            
+            
+            else:
+                context = {"form": form,
+                            "title": title,
+                            "message":"ENter valid acc_no"
+                    }
+                return render(request, "transaction/addmoney_own.html", context)
         context = {"form": form,
                    "title": title
                    }
         return render(request, "transaction/addmoney_own.html", context)
 
-
+        
 @login_required()
-def debit_money(request):
+def debit_money(request): #1
     if not request.user.is_authenticated:
         return redirect("home")
     else:
+        if request.user.designation!="user":
+            return redirect("home")
         title = "Debit Money "
         form = debitMoney(request.POST or None)
         if form.is_valid():
-            account_no = form.cleaned_data.get("acc_No")
+            account_no = form.cleaned_data.get("acc_no")
             amount=form.cleaned_data.get("Amount")
             message = form.cleaned_data.get('message')
             ammount_user=request.user.balance
             #makepay=request.user.do_transaction(0,amount)
-            if(ammount_user > amount):
-                start_transact(request,request.user,request.user.full_name,"1",account_no,amount,message)
-                context = {"message": 'Pls wait 24hrs to complete transaction',
+            if (account_no==request.user.acc_no):
+                if(ammount_user > amount):
+                    OTP = form.cleaned_data.get("OTP")
+                    Userlog = request.user
+                    totp = pyotp.TOTP(Userlog.OTPSeed)
+                    print("Current OTP:", totp.now())
+                    if not Userlog.verify_otp(OTP):
+                        print('Invalid OTP')
+                        context = {"form": form,
+                            "title": title,
+                            "message":"Invalid OTP"
+                        }
+                        return render(request, "transaction/addmoney_own.html", context)
+                    else:
+                        start_transact(request,request.user,request.user.full_name,"1",account_no,amount,message,OTP)
+                        context = {"message": 'Pls wait 24hrs to complete transaction',
                             "Acc" : request.user.acc_no,
                             "bal" :ammount_user
-
                         }
-
-                return redirect("home")
-            else:
-                print('insuffiecient balance')
-                context = {"message": 'Error : Insufficient Balance',
-                        "name" : request.user.full_name,
-                        "Acc" :  request.user.acc_no,
-                        "bal" :ammount_user
+                        return redirect("home")
+                else:
+                    print('insuffiecient balance')
+                    context = {"message": 'Error : Insufficient Balance',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :ammount_user
                    
-                   }
+                    }
 
             #return redirect("home")
-                return render(request,"transaction/bal_insuff.html", context)
-                
+                    return render(request,"transaction/bal_insuff.html", context)
+            
+
+            else:    
+                context = {"form": form,
+                            "title": title,
+                            "message":"ENter valid acc_no"
+                    }
+                return render(request, "transaction/debitmoney.html", context)
         context = {"form": form,
-                   "title": title
-                   }
+                            "title": title,
+                    }
         return render(request, "transaction/debitmoney.html", context)
 
 def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message,OTP):
@@ -141,7 +196,7 @@ def start_transact(request,user, to_name , Tr_type, to_acc_no, ammount,message,O
                     transactions = TX_in(fromUser = from_acc, toUser = None, status='3',
                                                 full_name= user.full_name, acc_no= from_acc.acc_no,
                                                 is_cash=True,
-                                                Amount=ammount,
+                                                Amount=ammounstart_transact(request,request.user,r_name,"3",account_no,amount,message,OTP),
                                                 creation_time=currentDT,
                                                 message=message,
                                                 Tr_type="1",
