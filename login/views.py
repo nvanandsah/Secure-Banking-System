@@ -45,10 +45,8 @@ def signup(request):
                 Pubk = key_pair.publickey().exportKey()
                 public_key.write(Pubk)
                 public_key.close()
-=======
             #    key_pair = RSA.generate(1024)
             #    private_key = open("privatekey.pem", "w")
->>>>>>> 09a22451869c95e9c4ca51f398ee04a2044f2239
                 print(x)
             print("bc")
             user.save()
