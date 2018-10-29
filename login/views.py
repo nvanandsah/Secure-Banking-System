@@ -4,13 +4,14 @@ from .forms import UserRegistrationForm, UserLoginForm
 from transaction.forms import trnsction
 from .models import User
 import pyotp
+import  keyboard
 from transaction.models import TX_in
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
-from Crypto.PublicKey import RSA
+#from Crypto.PublicKey import RSA
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -19,7 +20,7 @@ def signup(request):
         form = UserRegistrationForm(request.POST or None)
         if form.is_valid():
             user = form.save(commit=False)
-            password = form.cleaned_data.get("password1")
+            password = form.cleaned_data.keyboard.get("password1")
             user.set_password(password)
             if not user.acc_no:
                 largest = User.objects.all().aggregate(
@@ -30,8 +31,8 @@ def signup(request):
                 else:
                     user.acc_no = 10000000
                 x,y = user.regenerate_OTPseed()
-                key_pair = RSA.generate(1024)
-                private_key = open("privatekey.pem", "w")
+ #               key_pair = RSA.generate(1024)
+ #               private_key = open("privatekey.pem", "w")
                 print(x)
             print("bc")
             user.save()
