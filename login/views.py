@@ -5,7 +5,6 @@ from login.forms import modifyacc
 from transaction.forms import trnsction
 from .models import User
 import pyotp
-import  keyboard
 from transaction.models import TX_in
 from django.db.models import Max
 from django.contrib.auth import (authenticate,
@@ -25,7 +24,7 @@ def signup(request):
         form = UserRegistrationForm(request.POST or None)
         if form.is_valid():
             user = form.save(commit=False)
-            password = form.cleaned_data.keyboard.get("password1")
+            password = form.cleaned_data.get("password1")
             user.set_password(password)
             if not user.acc_no:
                 largest = User.objects.all().aggregate(
