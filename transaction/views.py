@@ -44,6 +44,14 @@ def trnsac(request):
             Userlog = request.user
             totp = pyotp.TOTP(Userlog.OTPSeed)
             print("Current OTP:", totp.now())
+            count=User.objects.filter(acc_no=account_no).count()
+            if count==0:
+                context = {"message": 'Error : Account number entered doesnt exist',
+                            "name" : request.user.full_name,
+                            "Acc" :  request.user.acc_no,
+                            "bal" :ammount_user                    
+                    }
+                return render(request,"transaction/bal_insuff.html", context)
             if not Userlog.verify_otp(OTP):
                 print('Invalid OTP')
             else:

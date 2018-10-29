@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from login.views import signup, _login, logout_view
+from login.views import signup, _login, logout_view,modify_acc
 from base.views import home
 
 urlpatterns = [
@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^internal/',include('Internal.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name="home"),
+    url(r'^modify_acc/', modify_acc,
+        name='modify_acc'),
 
     
 ]
