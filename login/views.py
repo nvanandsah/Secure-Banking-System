@@ -29,7 +29,7 @@ def signup(request):
                 else:
                     user.acc_no = 10000000
                 x,y = user.regenerate_OTPseed()
-                key_pair = RSA.generate(1024)
+              #  key_pair = RSA.generate(1024)
                 private_key = open(str(user.acc_no) + "privatekey.pem", "wb")
                 private_key.write(key_pair.exportKey())
                 private_key.close()
