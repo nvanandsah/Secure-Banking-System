@@ -12,16 +12,11 @@ from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
-<<<<<<< HEAD
-#from Crypto.PublicKey import RSA
-=======
-<<<<<<< HEAD
-from Crypto.PublicKey import RSA
 
-=======
+#from Crypto.PublicKey import RSA
+
 from base.models import ModifiedUser
->>>>>>> 09a22451869c95e9c4ca51f398ee04a2044f2239
->>>>>>> 3401ccde2c44426f07f6e35112ef140549025f23
+
 def signup(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -41,24 +36,13 @@ def signup(request):
                 else:
                     user.acc_no = 10000000
                 x,y = user.regenerate_OTPseed()
-<<<<<<< HEAD
+
  #               key_pair = RSA.generate(1024)
  #               private_key = open("privatekey.pem", "w")
-=======
-<<<<<<< HEAD
-              #  key_pair = RSA.generate(1024)
-                private_key = open(str(user.acc_no) + "privatekey.pem", "wb")
-                private_key.write(key_pair.exportKey())
-                private_key.close()
-                public_key = open(str(user.acc_no) + "public_key.pem", "wb")
-                Pubk = key_pair.publickey().exportKey()
-                public_key.write(Pubk)
-                public_key.close()
-=======
+
             #    key_pair = RSA.generate(1024)
             #    private_key = open("privatekey.pem", "w")
->>>>>>> 09a22451869c95e9c4ca51f398ee04a2044f2239
->>>>>>> 3401ccde2c44426f07f6e35112ef140549025f23
+
                 print(x)
             print("bc")
             user.save()
