@@ -68,7 +68,42 @@
 							</tr>
 						{% endfor %}
 				</tbody>
+		</table>
+		<h2>Payment Requests by Merchants</h2>
+		<table class="alt">
+				<thead>
+				<tr>
+						<th>Merchant Name</th>
+						<th>To Acc No</th>
+						<th>Amount</th>
+						<th>Status</th>
+						<th>Approve</th>
+						<th>Decline</th>
 
-		
+				</tr>
+				</thead>
+				<tbody>
+						{% for i in mpay %}
+							<tr>
+								<td>{{i.full_name}}</td>
+								<td>{{i.to_acc_no}}</td>
+								<td>{{i.Amount}}</td>
+								<td>{{i.status}}</td>
+								{% if i.status != "Approved" %}
+								{% if i.status != "Declined" %}
+								<td>
+										<a href="{% url 'approveMReq' i.id %}">Approve</a>
+								</td>
+								<td>
+									<a href="{% url 'declineMReq' i.id %}">Decline</a>
+								</td>
+								{% endif %}
+								{% endif %}
+							</tr>
+						{% endfor %}
+				</tbody>
+		</table>
 	</body>
+
+
 </html>
