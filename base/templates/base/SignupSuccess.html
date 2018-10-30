@@ -12,7 +12,6 @@
 		<canvas id="qr" style="width:200px;"></canvas>
 		<script src="{% static 'js/qrious.min.js' %}"></script>
 		<script>
-			document.cookie='pubk={{Public_Key}}'
 			(function() {
 				var qr = new QRious({
 					element: document.getElementById('qr'),

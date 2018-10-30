@@ -36,17 +36,12 @@ def signup(request):
                     user.acc_no = 10000000
                 x,y = user.regenerate_OTPseed()
 
- #               key_pair = RSA.generate(1024)
- #                private_key = open(str(user.acc_no) + "privatekey.pem", "wb")
-                private_key.write(key_pair.exportKey())
-                private_key.close()
-                public_key = open(str(user.acc_no) + "public_key.pem", "wb")
-                Pubk = key_pair.publickey().exportKey()
-                public_key.write(Pubk)
-                public_key.close()
-
-            #    key_pair = RSA.generate(1024)
-            #    private_key = open("privatekey.pem", "w")
+               # key_pair = RSA.generate(1024)
+               # private_key = open(str(user.acc_no) + "privatekey.pem", "wb")
+            
+                Pubk='w'
+               # key_pair = RSA.generate(1024)
+               # private_key = open("privatekey.pem", "w")
 
                 print(x)
             print("bc")

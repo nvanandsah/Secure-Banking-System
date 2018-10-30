@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from transaction.models import TX_in
-from base.models import ModifiedUser
+from .models import ModifiedUser
 # Create your views here.
 
 def get_from_tuple(my_tuple, key):
