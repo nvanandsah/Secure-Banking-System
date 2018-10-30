@@ -8,20 +8,38 @@
     {% for message in messages %}
     <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
+    
 </ul>
 {% endif %}
+<style>
+  a:link, a:visited {
+      background-color: #4b4747;
+      color: white;
+      font-size: 20px;
+      padding: 15px 30px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+  }
+  
+  
+  a:hover, a:active {
+      background-color: rgb(65, 45, 45);
+  }
+  </style>
 <div class="container" style="padding-top: 50px;">
 <div class="jumbotron text-center">
       <div class="container">
-        <h1 class="jumbotron-heading">Banking System</h1>
+        <h1 style="color:brown;font-size:40px;text-align:center;margin-top:-25px" class="jumbotron-heading">Secure Banking System</h1>
+        <p style="text-align:center;font-size:27px" class="lead text-muted">Home Page</p>
         <hr>
-        <p class="lead text-muted">Home Page</p>
+        <hr>
         <p>
-          <a class="btn btn-primary btn-md" href="{% url 'signup' %}" role="button">Signup Page</a>
+          <a style="margin-left:600px;margin-top: 50px" class="btn btn-primary btn-md" href="{% url 'login' %}" role="button">Login</a>
+          <a style="margin-left:100px" class="btn btn-primary btn-md" href="{% url 'signup' %}" role="button">Signup</a>
+          
        </p>
-        <p>
-          <a class="btn btn-primary btn-md" href="{% url 'login' %}" role="button">Login Page</a>
-       </p>
+       
       </div>
 </div>
 </div>
