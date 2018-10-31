@@ -4,21 +4,41 @@
 	<head>
 		<meta charset="utf-8">
 		<title>logged in </title>
+		<style>
+				a:link, a:visited {
+					background-color: #422828;
+					color: white;
+					font-size: 20px;
+					padding: 15px 30px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+				}
+				
+				
+				a:hover, a:active {
+					background-color: rgb(65, 45, 45);
+				}
+				</style>
 	</head>
 	<body>
-		<h1>Successfully logged in {{name}}</h1>
-        <h1>Account No. {{Acc}}</h1>
-        <h1> Welcome to Secure Bank </h1>
-		
-		<h2>Balance {{bal}}</h2>
+		<h1 style="text-align:center;color: darkslategray">Successfully logged in as {{name}}</h1>
+		<h1 style="text-align:center;color: darkslategray">Logged in as a Merchant</h1>
+		<h1 style="text-align:center;color: darkslategray">Account No. {{Acc}}</h1>
+		<hr>
+		<h2>Available Balance: ₹{{bal}}</h2>
+		<hr>
 		<p>
-			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a style="margin-left:230px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'addmoney' %}" role="button">Add Money</a>
-            <a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
-            <a class="btn btn-primary btn-md" href="{% url 'linkacc' %}" role="button">Link Money</a>
-		 </p>
-		 <table class="alt">
+			<a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
+			<a class="btn btn-primary btn-md" href="{% url 'modify_acc' %}" role="button">Modify Account </a>
+			<a class="btn btn-primary btn-md" href="{% url 'transactionMerch' %}" role="button">Create Transaction </a>
+
+		</p>
+		<h2 style="text-align:center">Transactions</h2>
+		 <table align="center" class="alt"  style="margin-left:3px;border: 1px solid black;width: 100%;">
 			<thead>
 			<tr>
 				<th>To User</th>
@@ -40,6 +60,62 @@
 				</tr>
 			{% endfor %}
 			</tbody>
+
 		</table>
+
+		<h2 style="text-align:center">Modification Requests</h2>
+		
+		<table align="center" class="alt"  style="margin-left:3px;border: 1px solid black;width: 100%;">
+				<thead>
+				<tr>
+						<th>Full Name</th>
+						<th>City</th>
+						<th>Contact</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>Status</th>
+				</tr>
+				</thead>
+				<tbody>
+						{% for i in changes %}
+							<tr>
+								<td>{{i.full_name}}</td>
+								<td>{{i.city}}</td>
+								<td>{{i.contact_no}}</td>
+								<td>{{i.Address}}</td>
+								<td>{{i.email}}</td>
+								<td>{{i.isModified}}</td>
+							</tr>
+						{% endfor %}
+				</tbody>
+			
+		</table>
+			
+
+		<h2 style="text-align:center">Created Payments</h2>
+		<table align="center" class="alt"  style="margin-left:3px;border: 1px solid black;width: 100%;">
+				<thead>
+				<tr>
+						<th>From Acc No</th>
+						<th>To Acc No</th>
+						<th>Amount</th>
+						<th>Status</th>
+				
+				</tr>
+				</thead>
+				<tbody>
+						{% for i in mpay %}
+							<tr>
+								<td>{{i.from_acc_no}}</td>
+								<td>{{i.to_acc_no}}</td>
+								<td>{{i.Amount}}</td>
+								<td>{{i.status}}</td>
+				
+							</tr>
+						{% endfor %}
+				</tbody>
+		</table>
+
+		
 	</body>
 </html>

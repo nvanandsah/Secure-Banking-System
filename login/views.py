@@ -50,8 +50,8 @@ def signup(request):
             user = authenticate(username=email, password=password)
             print(user)
             #return render(request,"base/loggedin.html",{'name':email, 'Acc':user.acc_no,'Pass':password})
-            if(user.designation == "user"):
-                return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y,'Public_Key': Pubk})
+            if(user.designation == "user" or user.designation == "merchant" ):
+                return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y})
             else:
                 return redirect("home")
         else:

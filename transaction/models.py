@@ -31,8 +31,8 @@ class TX_in(models.Model):
         )
         Amount = models.PositiveIntegerField(
                 validators=[
-                    MinValueValidator(1000),
-                    MaxValueValidator(100000)
+                    MinValueValidator(1),
+                    MaxValueValidator(10000000)
                 ]
         )
         OTP = models.PositiveIntegerField(
@@ -59,7 +59,7 @@ class TX_in(models.Model):
             ('2', "Payment/Cash"),
             ('3', "Processing"),
             ('4', "Rejection"),
-            ('5', "Error_Occured"),
+            ('5', "Insufficient Balance"),
         )
         status = models.CharField(max_length=1, choices=STATUS, editable=False,default="3")
         Tr_type=models.CharField(max_length=1,default="1")
@@ -68,6 +68,61 @@ class TX_in(models.Model):
        # last_changed_time = models.DateTimeField(auto_now=True)
 
         #@staticmethod
+
+class TX_merchant(models.Model):
+    full_name = models.CharField(
+                max_length=256,
+                blank=False,
+                validators=[
+                        RegexValidator(
+                            regex=REGEX,
+                            message='Name must be Alphabetic',
+                            code='invalid_full_name'
+                            )
+                        ]
+        )
+    m_acc_no=models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(10000000),
+                    MaxValueValidator(99999999)
+                    ],
+                default=99999999
+        )
+    from_acc_no = models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(10000000),
+                    MaxValueValidator(99999999)
+                    ]
+        )
+    to_acc_no = models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(10000000),
+                    MaxValueValidator(99999999)
+                    ]
+        )
+    Amount = models.PositiveIntegerField(
+                validators=[
+                    MinValueValidator(1),
+                    MaxValueValidator(10000000)
+                ]
+        )
+    message = models.CharField(
+                max_length=256,
+                validators=[
+                        RegexValidator(
+                            regex=REGEX,
+                            message='Messages must be Alphabetic',
+                            code='invalid_message_name'
+                            )
+                        ]
+        )
+    STATUS = (
+            ('1', "Approved"),
+            ('2', "Rejected"),
+            ('3', "Processing"),
+    
+        )
+    status = models.CharField(max_length=1, choices=STATUS, editable=False,default="3")
 
 
         

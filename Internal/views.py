@@ -35,7 +35,7 @@ def home(request):
         if request.user.designation=="admin":
             return redirect("iaccount_handling")
         if request.user.designation=="merchant":
-            return redirect("home")
+            return redirect("homeMerchant")
         if request.user.designation=="employee":
             arr=TX_in.objects.filter(Amount__lte=100000)
         else:
@@ -215,6 +215,10 @@ def approve_change_request(request,accNo):
         return redirect("home")
     if request.user.designation!="admin":
         return redirect("home")
+    arr=ModifiedUser.objects.filter(acc_no=accNo)
+    for i in arr:
+        if i.isModified!="1":
+            return redirect("home")
     c=ModifiedUser.objects.filter(acc_no=accNo)[0]
     ModifiedUser.objects.filter(acc_no=accNo).update(isModified="2")
     User.objects.filter(acc_no=accNo).update(full_name=c.full_name,email=c.email,Address=c.Address,city=c.city,contact_no=c.contact_no)
@@ -226,6 +230,10 @@ def decline_change_request(request,accNo):
         return redirect("home")
     if request.user.designation!="admin":
         return redirect("home")
+    arr=ModifiedUser.objects.filter(acc_no=accNo)
+    for i in arr:
+        if i.isModified!="1":
+            return redirect("home")
     ModifiedUser.objects.filter(acc_no=accNo).update(isModified="3")
     return redirect("userRequests")
 
