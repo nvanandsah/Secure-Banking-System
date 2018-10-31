@@ -70,19 +70,6 @@ class User(AbstractUser):
     def __str__(self):
         return str(self.acc_no)
 
-    def do_transaction(self, transaction_type, amount, transaction, commit=True):
-            if amount <= 0:
-                raise BankingException('Invalid Amount')
-            if transaction is None or transaction.amount != amount and transaction.status != 'A':
-                raise BankingException('Security Error')
-            if transaction_type == '1':
-                self.balance -= amount
-            if transaction_type == '2':
-                self.balance += amount
-            if self.balance < 0:
-                raise BankingException('Security Error')
-            if commit:
-                self.save()
     def regenerate_OTPseed(self):
         self.OTPSeed = pyotp.random_base32()
         print(self.OTPSeed)

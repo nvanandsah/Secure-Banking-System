@@ -5,7 +5,7 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
     )
-
+from login.managers import UserManager
 # Create your models here.
 REGEX = '^[a-zA-Z ]*$'
 alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
@@ -33,6 +33,7 @@ class ModifiedUser(models.Model):
     email = models.EmailField(unique=True, blank=False)
     contact_no = models.IntegerField(unique=True)
     Address = models.CharField(max_length=512)
+    objects = UserManager()
     city = models.CharField(max_length=256)
     isModified=models.CharField(max_length=1,default="0") #1: initiated 2:approved 3:declined
     def __str__(self):

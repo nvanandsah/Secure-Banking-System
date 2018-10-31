@@ -57,6 +57,27 @@ class addMoney(forms.Form):
         if amount and not message:
             raise forms.ValidationError('You have to write something!')
 
+class transferMerch(forms.Form):
+    Amount = forms.IntegerField(label="Amount")
+    from_acc_no = forms.IntegerField(label="from_acc_no")
+    to_acc_no = forms.IntegerField(label="to_acc_no")
+    message = forms.CharField(
+        max_length=2000,
+        widget=forms.Textarea(),
+        help_text='Write here your message!'
+    )
+    full_name=forms.CharField(
+        max_length=2000,
+    )
+    def clean(self):
+        Amount = self.cleaned_data.get('Amount')
+        message = self.cleaned_data.get('message')
+        from_acc_no=self.cleaned_data.get("from_acc_no")
+        to_acc_no=self.cleaned_data.get("to_acc_no")
+        full_name=self.cleaned_data.get("full_name")
+        if Amount and not message:
+            raise forms.ValidationError('You have to write something!')
+
 '''class debitMoney(forms.ModelForm):
     class Meta:
         model = debitmoney

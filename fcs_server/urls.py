@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from login.views import signup, _login, logout_view,modify_acc
-from base.views import home
+from base.views import home,homeMerchant
 
 urlpatterns = [
     url(r'^login/',_login,name="login"),
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^internal/',include('Internal.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^$',home,name="home"),
+    url(r'^home_merchant',homeMerchant,name="homeMerchant"),
     url(r'^modify_acc/', modify_acc,
         name='modify_acc'),
 
