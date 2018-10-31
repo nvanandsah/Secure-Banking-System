@@ -4,26 +4,42 @@
 	<head>
 		<meta charset="utf-8">
 		<title>logged in </title>
+		<style>
+			a:link, a:visited {
+				background-color: #422828;
+				color: white;
+				font-size: 20px;
+				padding: 15px 30px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+			}
+			
+			
+			a:hover, a:active {
+				background-color: rgb(65, 45, 45);
+			}
+			</style>
 	</head>
 	<body>
-		<h1>Successfully logged in {{name}}</h1>
-		<h1>Account No. {{Acc}}</h1>
+		<h1 style="text-align:center;color: darkslategray"> You are Successfully logged in as: {{name}}</h1>
+		<h1 style="text-align:center;color: darkslategray">Your Account No. is: {{Acc}}</h1>
 		
-		<h2>Balance {{bal}}</h2>
+		<h2 style="text-align:center;color: darkslategray">Your Available Balance- ₹{{bal}}</h2><hr><hr>
 		<p>
-			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a style="margin-left:350px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'addmoney' %}" role="button">Add Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'modify_acc' %}" role="button">Modify Account </a>
 
 		</p>
-		<h2>Transactions</h2>
-		 <table class="alt">
-			<thead>
+		<h2 style="text-align:center;margin-top:80px;color: rgb(42, 36, 49)" >Transactions</h2>
+		 <table style="margin-left:3px;border: 1px solid black;width: 100%;" class="alt">
+			<thead  style="text-align:center">
 			<tr>
 				<th>To User</th>
-				<th>Account Number</th>
+				<th >Account Number</th>
 				<th>Status</th>
 				<th>Amount</th>
 				<th>TXN_type</th>
@@ -44,8 +60,8 @@
 
 		</table>
 
-		<h2>Modification Requests</h2>
-		<table class="alt">
+		<h2 style="text-align:center" >Modification Requests</h2>
+		<table  style="margin-left:3px;border: 1px solid black;width: 100%;"class="alt">
 				<thead>
 				<tr>
 						<th>Full Name</th>
