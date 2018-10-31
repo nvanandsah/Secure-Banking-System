@@ -94,3 +94,8 @@ def homeMerchant(request):
 		
 		return render(request,"base/login_Merch.html",{'name' : request.user.email,'Acc':request.user.acc_no,'bal':request.user.balance, 'trns':arr,'changes':changes,'mpay':mpay})
 
+
+def user_details(request):
+	if not (request.user.is_authenticated):
+		return redirect("home")
+	return render(request,"base/details.html",{'user':request.user})
