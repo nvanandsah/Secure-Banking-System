@@ -13,6 +13,7 @@
 				text-align: center;
 				text-decoration: none;
 				display: inline-block;
+				border-radius:90%;
 			}
 			
 			
@@ -27,7 +28,7 @@
 		
 		<h2 style="text-align:center;color: darkslategray">Your Available Balance- ₹{{bal}}</h2><hr><hr>
 		<p>
-			<a style="margin-left:350px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			<a style="margin-left:280px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'addmoney' %}" role="button">Add Money</a>
 			<a class="btn btn-primary btn-md" href="{% url 'debitmoney' %}" role="button">Debit Money</a>
@@ -36,7 +37,7 @@
 
 		</p>
 		<h2 style="text-align:center;margin-top:80px;color: rgb(42, 36, 49)" >Transactions</h2>
-		 <table style="margin-left:3px;border: 1px solid black;width: 100%;" class="alt">
+		 <table  rules="all" style="margin-left:3px;border: 1px solid black;width: 100%;" class="alt">
 			<thead  style="text-align:center">
 			<tr>
 				<th>To User</th>
@@ -62,7 +63,7 @@
 		</table>
 
 		<h2 style="text-align:center" >Modification Requests</h2>
-		<table  style="margin-left:3px;border: 1px solid black;width: 100%;"class="alt">
+		<table rules="all" style="margin-left:3px;border: 1px solid black;width: 100%;border-collapse: collapse;"class="alt">
 				<thead>
 				<tr>
 						<th>Full Name</th>
@@ -87,7 +88,7 @@
 				</tbody>
 		</table>
 		<h2 style="text-align:center;margin-top:80px;color: rgb(42, 36, 49)">Payment Requests by Merchants</h2>
-		<table style="margin-left:3px;border: 1px solid black;width: 100%;" class="alt">
+		<table rules="all" style="margin-left:3px;border: 1px solid black;width: 100%;" class="alt">
 				<thead>
 				<tr>
 						<th>Merchant Name</th>
