@@ -41,8 +41,6 @@ def signup(request):
                 Pubk = key_pair.publickey().exportKey()
                 public_key.write(Pubk)
                 public_key.close()
-            #    key_pair = RSA.generate(1024)
-            #    private_key = open("privatekey.pem", "w")
                 print(x)
             print("bc")
             user.save()
@@ -51,7 +49,8 @@ def signup(request):
             print(user)
             #return render(request,"base/loggedin.html",{'name':email, 'Acc':user.acc_no,'Pass':password})
             if(user.designation == "user" or user.designation == "merchant" ):
-                return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y})
+                print(Pubk)
+                return render(request,"base/SignupSuccess.html",{'name' : user.email,'Acc':user.acc_no,'bal':user.balance, 'otp':y,'pubk':Pubk})
             else:
                 return redirect("home")
         else:

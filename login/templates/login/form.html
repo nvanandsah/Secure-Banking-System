@@ -1,7 +1,8 @@
 {% extends "base/base.html" %}
 {% load crispy_forms_tags %}
 {% block title %} {{ title }} | {{ block.super }}{% endblock title %}
-
+<link href="css/keyboard.css" rel="stylesheet">
+<script src="js/jquery.keyboard.js"></script>
 {% block content %}
 {% include "base/messages.html" %}
 <h2 style="text-align:center;color:brown;font-size:35px">{{ title }}</h2><hr><hr>
@@ -10,10 +11,24 @@
     {% csrf_token %}
     {{ form|crispy }}
     <br>
-    <input style="background-color:beige;font-size:20px;font-family:fantasy" class="btn btn-success" type="submit" value='Submit'>
+    <input style="background-color:beige;font-size:20px;font-family:fantasy" id="testme" class="btn btn-success" type="submit"  value='Submit'>
 </div>
 </form>
+<script type="text/javascript">
+ $(function() {
+
+// Run a quick encryption/decryption when they click.
+$('#testme').click(function() {
+var elements = document.getElementsByTagName("input");
+for (var i = 0; i < elements.length; i++) {
+    alert((elements[i].value));
+    }
+});
+}
+</script>
+
 {{ form.errors }}
 <h2><b>{{message}}</b></h2>
+
 {{ form.non_field_errors }}
 {% endblock content %}

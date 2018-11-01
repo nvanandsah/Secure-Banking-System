@@ -74,7 +74,7 @@ class User(AbstractUser):
         self.OTPSeed = pyotp.random_base32()
         print(self.OTPSeed)
         self.save()
-        return self.OTPSeed,pyotp.totp.TOTP(self.OTPSeed).provisioning_uri("alice@google.com", issuer_name="Secure App")
+        return self.OTPSeed,pyotp.totp.TOTP(self.OTPSeed).provisioning_uri(self.full_name, issuer_name="FCS ")
         #return self.OTPSeed
 
     def verify_otp(self, otp):

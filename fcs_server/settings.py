@@ -25,9 +25,7 @@ SECRET_KEY = '$^--)vin1nj250@f_t(lcyyltkwi!7605h^@6b97#xz_&xe_mm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.2.245']
 # Application definition
 
 INSTALLED_APPS = [
@@ -89,7 +87,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fcs_server.wsgi.application'
-
+SECURE_SSL_REDIRECT = True
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -152,4 +150,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.2.245']

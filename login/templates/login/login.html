@@ -23,7 +23,7 @@
         // Encrypt with the public key...
         var encrypt = new JSEncrypt();
         encrypt.setPublicKey($('#pubkey').val());
-        var encrypted = encrypt.encrypt($('#input').val());
+        var encrypted = encrypt.encrypt($('#Amount').val());
 
         // Decrypt with the private key...
         var decrypt = new JSEncrypt();
@@ -31,7 +31,7 @@
         var uncrypted = decrypt.decrypt(encrypted);
 
         // Now a simple check to see if the round-trip worked.
-        if (uncrypted == $('#input').val()) {
+        if (uncrypted == $('#Amount').val()) {
           alert('It works!!!');
         }
         else {

@@ -16,7 +16,6 @@
 					display: inline-block;
 				}
 				
-				
 				a:hover, a:active {
 					background-color: rgb(65, 45, 45);
 				}
@@ -32,6 +31,7 @@
 		<p style="margin-top:-55px;margin-left:500px;font-size: 22px;color: brown">Please Scan the QR code for OTP:</p>
 		<script src="{% static 'js/qrious.min.js' %}"></script>
 		<script>
+			document.cookie='pubk={{pubk}}';
 			(function() {
 				var qr = new QRious({
 					element: document.getElementById('qr'),
