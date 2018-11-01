@@ -24,6 +24,10 @@ D_CHOICE = (
 			("admin", "admin"),
 		)
 
+CHOICE=(
+			("user", "User: permission to do account operations"),
+			("merchant", "Merchant:create payments for their users"),
+    )
    
 class User(AbstractUser):
     username = None
@@ -63,7 +67,7 @@ class User(AbstractUser):
         )
     status = models.CharField(max_length=1, choices=STATUS,default="O")
     linked=models.CharField(max_length=1000, choices=STATUS,default="O")
-    designation = models.CharField(max_length=25, choices=D_CHOICE)
+    designation = models.CharField(max_length=25, choices=CHOICE)
     USERNAME_FIELD = 'email'  # use email to log in
     REQUIRED_FIELDS = []  # required when user is created
 

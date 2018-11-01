@@ -11,7 +11,7 @@ from django.contrib.auth import (authenticate,
                                  login,
                                  logout
                                  )
-from Crypto.PublicKey import RSA
+
 
 from base.models import ModifiedUser
 def signup(request):
