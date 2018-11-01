@@ -262,7 +262,7 @@ def debit_money(request): #1
     if not request.user.is_authenticated:
         return redirect("home")
     else:
-        if request.user.designation!="user" or request.user.designation!="manager":
+        if request.user.designation!="user" and request.user.designation!="merchant":
             return redirect("home")
         title = "Debit Money "
         form = debitMoney(request.POST or None)

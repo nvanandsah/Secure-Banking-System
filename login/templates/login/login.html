@@ -5,9 +5,39 @@
 {% block content %}
 {% include "core/messages.html" %}
 <h2>{{ title }}</h2><hr>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="bin/jsencrypt.min.js"></script>
 <form method="POST" action="" enctype='multipart/form-data'>
      {{ form|crispy }}
     <br>
     <input class="btn btn-success" type="submit" value='Submit'>
 </form>
+<script type="text/javascript">
+
+    // Call this code when the page is done loading.
+    $(function() {
+
+      // Run a quick encryption/decryption when they click.
+      $('#testme').click(function() {
+
+        // Encrypt with the public key...
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey($('#pubkey').val());
+        var encrypted = encrypt.encrypt($('#input').val());
+
+        // Decrypt with the private key...
+        var decrypt = new JSEncrypt();
+        decrypt.setPrivateKey($('#privkey').val());
+        var uncrypted = decrypt.decrypt(encrypted);
+
+        // Now a simple check to see if the round-trip worked.
+        if (uncrypted == $('#input').val()) {
+          alert('It works!!!');
+        }
+        else {
+          alert('Something went wrong....');
+        }
+      });
+    });
+  </script>
 {% endblock content %}

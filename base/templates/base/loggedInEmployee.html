@@ -4,6 +4,22 @@
 	<head>
 		<meta charset="utf-8">
 		<title>logged in </title>
+		<style>
+				a:link, a:visited {
+					background-color: #422828;
+					color: white;
+					font-size: 20px;
+					padding: 15px 30px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+				}
+				
+				
+				a:hover, a:active {
+					background-color: rgb(65, 45, 45);
+				}
+				</style>
 	</head>
 	
 	<body>
@@ -14,13 +30,14 @@
 				{% endfor %}
 			</ul>
 			{% endif %}
-        <h1>Successfully logged in as {{name.full_name}}</h1>
-        <h2>Logged in as an {{name.designation}}</h2>
+        <h1 style="text-align:center; font-size:45px">Successfully logged in as {{name.full_name}}</h1>
+        <h2 style="text-align:center ; font-size: 30px">Logged in as an {{name.designation}}</h2>
 		<p>
-			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
-			<a class="btn btn-primary btn-md" href="{% url 'transfer' %}" role="button">Transfer Money</a>
+			<hr><hr>
+			<a  style="margin-left:1350px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 		 </p>
-		 <table class="alt">
+		 <div >
+		 <table align="center" style="margin-left:3px;border: 2px solid black;width: 100%;" class="alt">
 			<thead>
 			<tr>
                 <th>From User</th>
@@ -67,6 +84,7 @@
 				</tr>
 			{% endfor %}
 			</tbody>
+		</div>
 		</table>
 	</body>
 </html>

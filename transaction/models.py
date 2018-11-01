@@ -9,7 +9,7 @@ import datetime
 from login.models import User
 from django.db.models import SET_NULL, CASCADE
 from django.contrib import messages
-
+from login.managers import UserManager
 REGEX = '^[a-zA-Z ]*$'
 class TX_in(models.Model):
         full_name = models.CharField(
@@ -51,6 +51,7 @@ class TX_in(models.Model):
                             )
                         ]
         )
+        objects = UserManager()
         fromUser = models.ForeignKey(User,related_name="from_account", null=True, on_delete=SET_NULL, blank=True)
         toUser = models.ForeignKey(User, related_name="to_account", null=True, on_delete=SET_NULL, blank=True)
         STATUS = (

@@ -3,7 +3,23 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>logged in </title>
+		<title>Logged in </title>
+		<style>
+			a:link, a:visited {
+				background-color: #422828;
+				color: white;
+				font-size: 20px;
+				padding: 15px 30px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+			}
+			
+			
+			a:hover, a:active {
+				background-color: rgb(65, 45, 45);
+			}
+			</style>
 	</head>
 	
 	<body>
@@ -14,16 +30,17 @@
 				{% endfor %}
 			</ul>
 			{% endif %}
-        <h1>Successfully logged in {{name.email}}</h1>
-        <h2>Logged in as an {{name.designation}}</h2>
+        <h1 style="color:rgb(68, 60, 60);font-size:40px;text-align:center;margin-top:10px" class="jumbotron-heading">Successfully logged in : {{name.full_name}}</h1>
+		<h2 style="text-align:center;font-size:30px;color:rgb(68, 60, 60)">Logged in as an {{name.designation}}</h2>
+		<hr><hr>
 		<p>
-			<a class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
-			<a class="btn btn-primary btn-md" href="{% url 'home' %}" role="button">Home</a>
+			<a style="margin-left:500px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
 			<a class="btn btn-primary btn-md" href="{% url 'userRequests' %}" role="button">User Requests</a>
+			<a class="btn btn-primary btn-md" href="{% url 'add_acc' %}" role="button">Add account</a>
+
          </p>
-         <a class="btn btn-primary btn-md" href="{% url 'add_acc' %}" role="button">Add account</a>
-         <h2>All Internal Accounts</h2>
-		 <table class="alt">
+         <h2 style="text-align:center;margin-top:100px;color: rgb(68, 60, 60)">All Internal Accounts</h2>
+		 <table style="margin-left:3px;border: 1px solid black;width: 100%;"class="alt">
 			<thead>
 			<tr>
                 <th>full_name</th>

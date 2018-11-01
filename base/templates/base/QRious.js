@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,15 +9,8 @@
   <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
   <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
   <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
-
-
-
   <link crossorigin="anonymous" media="all" integrity="sha512-FCg44VGg5ax/5MpZ8otwiPE+/tG1/Sq67mKkl6agbqgoScZtJyXhQSFQMIJfOHMZZ+yXDINb8nEiws60SiLohg==" rel="stylesheet" href="https://assets-cdn.github.com/assets/frameworks-5aa6d9885579bb2359f66266aee26f3b.css" />
   <link crossorigin="anonymous" media="all" integrity="sha512-x4PO1mCPp46SjlJMgIH6XQvFk9cU3zzaSmZjkmIwZuH+mVkUyb6GCKN51JkD9kgIBmeHNGji63owdUfK56wHXw==" rel="stylesheet" href="https://assets-cdn.github.com/assets/github-8907ab22fe75ba1be5a65387e03ecd5a.css" />
-  
-  
-  
-  
 
   <meta name="viewport" content="width=device-width">
   
@@ -58,7 +45,7 @@
 
     <meta name="google-analytics" content="UA-3769691-2">
 
-  <meta class="js-ga-set" name="userId" content="552f9e46d22bff6ae47fc7b3aaa9c0f2" %>
+  <meta class="js-ga-set" name="userId" content="552f9e46d22bff6ae47fc7b3aaa9c0f2" >
 
 <meta class="js-ga-set" name="dimension1" content="Logged In">
 

@@ -122,3 +122,9 @@ db.sqlite3
 login/migrations/__pycache__/0001_initial.cpython-36.pyc
 *.sqlite3
 db.sqlite3
+base/__pycache__/models.cpython-36.pyc
+base/__pycache__/views.cpython-36.pyc
+fcs_server/__pycache__/urls.cpython-36.pyc
+login/__pycache__/forms.cpython-36.pyc
+login/__pycache__/models.cpython-36.pyc
+login/__pycache__/views.cpython-36.pyc
