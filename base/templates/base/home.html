@@ -13,13 +13,14 @@
 {% endif %}
 <style>
   a:link, a:visited {
-      background-color: #4b4747;
+      background-color:#828b67;
       color: white;
       font-size: 20px;
       padding: 15px 30px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
+      overflow:hidden;
   }
   
   
@@ -27,16 +28,16 @@
       background-color: rgb(65, 45, 45);
   }
   </style>
-<div class="container" style="padding-top: 50px;">
+<div class="container" style="padding-top: 50px; background-image: url(img.jpg)">
 <div class="jumbotron text-center">
       <div class="container">
-        <h1 style="color:brown;font-size:40px;text-align:center;margin-top:-25px" class="jumbotron-heading">Secure Banking System</h1>
+        <h1 style="color:#172e23;font-size:40px;text-align:center;margin-top:-25px" class="jumbotron-heading">BANK OF IIIT DELHI</h1>
         <p style="text-align:center;font-size:27px" class="lead text-muted">Home Page</p>
         <hr>
         <hr>
         <p>
-          <a style="margin-left:600px;margin-top: 50px" class="btn btn-primary btn-md" href="{% url 'login' %}" role="button">Login</a>
-          <a style="margin-left:100px" class="btn btn-primary btn-md" href="{% url 'signup' %}" role="button">Signup</a>
+          <a style="margin-left:600px;margin-top: 50px; border-radius:90%" class="btn btn-primary btn-md" href="{% url 'login' %}" role="button">Login</a>
+          <a style="margin-left:100px;border-radius:90%" class="btn btn-primary btn-md" href="{% url 'signup' %}" role="button">Signup</a>
           
        </p>
        
