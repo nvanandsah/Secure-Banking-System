@@ -31,11 +31,11 @@
 			</ul>
 			{% endif %}
         <h1 style="text-align:center; font-size:45px">Successfully logged in as {{name.full_name}}</h1>
-        <h2 style="text-align:center ; font-size: 30px">Logged in as an {{name.designation}}</h2>
+		<h2 style="text-align:center ; font-size: 30px">Logged in as an {{name.designation}}</h2>
+		<hr><hr>
 		<p>
-			<hr><hr>
-			<a  style="margin-left:1350px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
-		 </p>
+			<a style="margin-left:650px" class="btn btn-primary btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+			 </p>
 		 <div >
 		 <table rules="all" align="center" style="margin-left:3px;border: 2px solid black;width: 100%;" class="alt">
 			<thead>
